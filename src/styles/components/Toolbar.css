@@ -13,10 +13,19 @@
     align-items: center;
     padding: 0 1rem;
 }
+
+.toolbar_logo {
+    margin-left: 1rem;
+}
+
 .toolbar_logo a{
     color: white;
     text-decoration: none;
     font-size: 1.5rem;
+}
+
+.spacer {
+    flex: 1;
 }
 
 .toolbar_navigation_items ul{
