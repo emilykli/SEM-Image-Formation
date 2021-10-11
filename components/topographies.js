@@ -24,7 +24,7 @@ class Topography {
 
     drawSlopeDown()
     {
-        fill(0, 0, 40, 75);
+        fill(0, 0, 40, 65);
         beginShape(TESS);
         vertex(1440-0, 350);
         vertex(1440-400, 400);
@@ -37,7 +37,7 @@ class Topography {
         vertex(1440-0, 900);
         endShape(CLOSE);
 
-        fill(0, 0, 60, 75);
+        fill(0, 0, 60, 65);
         beginShape(TESS);
         vertex(1440-0, 350);
         vertex(1440-350, 420);
@@ -51,7 +51,7 @@ class Topography {
         vertex(1440-0, 900);
         endShape(CLOSE);
 
-        fill(0, 0, 90, 75);
+        fill(0, 0, 90, 65);
         beginShape(TESS);
         vertex(1440-0, 350);
         vertex(1440-300, 450);
@@ -68,7 +68,7 @@ class Topography {
 
     drawChunkUp()
     {
-        fill(0, 0, 40, 75);
+        fill(0, 0, 40, 65);
         beginShape(TESS);
         vertex(0, 550);
         vertex(480, 550);
@@ -80,7 +80,7 @@ class Topography {
         vertex(0, 900);
         endShape(CLOSE);
 
-        fill(0, 0, 60, 75);
+        fill(0, 0, 60, 65);
         beginShape(TESS);
         vertex(0, 600);
         vertex(450, 600);
@@ -92,7 +92,7 @@ class Topography {
         vertex(0, 900);
         endShape(CLOSE);
 
-        fill(0, 0, 90, 75);
+        fill(0, 0, 90, 65);
         beginShape(TESS);
         vertex(0, 650);
         vertex(420, 650);
@@ -107,7 +107,7 @@ class Topography {
 
     drawChunkDown()
     {
-        fill(0, 0, 40, 75);
+        fill(0, 0, 40, 65);
         beginShape(TESS);
         vertex(0, 550);
         vertex(480, 550);
@@ -119,7 +119,7 @@ class Topography {
         vertex(0, 900);
         endShape(CLOSE);
 
-        fill(0, 0, 60, 75);
+        fill(0, 0, 60, 65);
         beginShape(TESS);
         vertex(0, 600);
         vertex(450, 600);
@@ -131,7 +131,7 @@ class Topography {
         vertex(0, 900);
         endShape(CLOSE);
 
-        fill(0, 0, 90, 75);
+        fill(0, 0, 90, 65);
         beginShape(TESS);
         vertex(0, 650);
         vertex(420, 650);
@@ -146,7 +146,7 @@ class Topography {
 
     drawDeltaCurve()
     {
-        fill(0, 0, 40, 75);
+        fill(0, 0, 40, 65);
         beginShape(TESS);
         vertex(0, 750);
         vertex(250, 720);
@@ -162,7 +162,7 @@ class Topography {
         vertex(0, 900);
         endShape(CLOSE);
 
-        fill(0, 0, 60, 75);
+        fill(0, 0, 60, 65);
         beginShape(TESS);
         vertex(0, 750);
         vertex(400, 780);
@@ -178,7 +178,7 @@ class Topography {
         vertex(0, 900);
         endShape(CLOSE);
 
-        fill(0, 0, 90, 75);
+        fill(0, 0, 90, 65);
         beginShape(TESS);
         vertex(0, 750);
         vertex(450, 800);

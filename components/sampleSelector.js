@@ -89,7 +89,6 @@ class SampleSelector{
 
     checkMouseStatus()
     {
-        console.log(mouseX + ", " + mouseY)
 
         //check if mouse is over left arrow button
         if(mouseX > 1130 && mouseX < 1180 && mouseY > 680 && mouseY < 860)
