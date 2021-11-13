@@ -1,6 +1,72 @@
-html, body {
+html {
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: black;
+}
+
+h1 {
+  color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 3vw;
+  margin: 2vw;
+  outline: 1px dotted green;
+}
+
+ul.horizontal {
+  margin: 2vw;
+  padding: 0;
+  text-align: center;
+  outline: 1px dotted pink;
+}
+ul.horizontal > li {
+  display: inline-block;
+  margin: 1vw;
+  padding: 0;
+  height: 80vh;
+  outline: 1px dotted yellow;
+}
+
+ul.verticalLeft{
+  padding: 0;
+  margin: 0;
+  outline: 1px dotted cyan;
+}
+
+ul.verticalLeft > li {
+  display: flex;
+  background-color: white;
+  outline: 1px dotted crimson;
+  height: 25vh;
+  margin: 1.25vh 0 1.25vh 0;
+}
+
+ul.verticalRight{
+  padding: 0;
+  margin: 0;
+  outline: 1px dotted cyan;
+}
+
+ul.verticalRight > li {
+  display: flex;
+  background-color: white;
+  outline: 1px dotted crimson;
+  height: 25vh;
+  margin: 10vh 0 10vh 0;
+}
+
+#leftbar {
+  width: 16vw;
+}
+
+#rightbar {
+  width: 16vw;
+}
+
+#simulation {
+  width: 55vw;
 }
 
 canvas {
