@@ -17,37 +17,53 @@
   <script src="libraries/p5.sound.min.js"></script>
   <script defer src="https://unpkg.com/p5.collide2d"></script>
 
-  <script src="ui-components/sketch.js"></script>
-  
+  <script>
+    lightBoxClose = function () {
+      document.querySelector(".lightbox").classList.add("closed");
+    }
+  </script>
+
+  <script type = "text/javascript" src="ui-components/sketch.js"></script>
+  <script type = "text/javascript" src="ui-components/sampleSelect.js"></script>
+
 </head>
 
 <body>
   <h1>SEM Image Formation Simulation</h1>
 
   <ul class="horizontal">
-    <li id = "leftbar">
-      <ul class = "verticalLeft">
+    <li id="leftbar">
+      <!-- <ul class="verticalLeft" onclick = "setup()"> -->
+        <ul class="verticalLeft">
         <li></li>
         <li></li>
         <li></li>
       </ul>
     </li>
 
-    <li id = "simulation">
-      <div id = "sketch-holder">
+    <li id="simulation">
+      <div id="sketch-holder">
         <!-- This is where the p5 sketch is-->
       </div>
     </li>
 
-    <li id = "rightbar">
-      <ul class = "verticalRight">
+    <li id="rightbar">
+      <ul class="verticalRight">
         <li></li>
         <li></li>
       </ul>
     </li>
   </ul>
 
-  
+  <!-- <div class="lightbox">
+    <div class="iframeContainer">
+      <div class="toolbarLB">
+        <span class="closeLB" onclick="lightBoxClose()">x</span>
+      </div>
+      <p>For best results, use in full screen mode.</p>
+    </div>
+  </div> -->
+
 </body>
 
 </html>
