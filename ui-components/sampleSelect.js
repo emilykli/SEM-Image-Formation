@@ -7,19 +7,21 @@ class Sample {
     }
 
     drawTwoBlocksStepped() {
-        translate(210, 470);
-        fill(95);
+        var translateX = 250;
+        var translateY = 550;
+        translate(translateX, translateY);
+        fill(160);
         beginShape(TESS);
-        vertex(0, 147*0.75);
-        vertex(0, 292*0.75);
-        vertex(730*0.75, 292*0.75);
-        vertex(730*0.75, 147*0.75);
-        vertex(365*0.75, 147*0.75);
-        vertex(365*0.75, 0);
-        vertex(145*0.75, 0);
-        vertex(145*0.75, 147*0.75);
-        vertex(0, 147*0.75);
+        vertex(0, 147*0.5);
+        vertex(0, 292*0.5);
+        vertex(730*0.5, 292*0.5);
+        vertex(730*0.5, 147*0.5);
+        vertex(365*0.5, 147*0.5);
+        vertex(365*0.5, 0);
+        vertex(145*0.5, 0);
+        vertex(145*0.5, 147*0.5);
+        vertex(0, 147*0.5);
         endShape(CLOSE);
-        translate(-210, -470);
+        translate(-translateX, -translateY);
     }
 }

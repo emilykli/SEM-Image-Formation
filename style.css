@@ -2,31 +2,35 @@ html {
   margin: 0;
   padding: 0;
   font-family: 'Source Sans Pro', sans-serif;
+  resize: none;
 }
 
 body {
   background-color: black;
+  position: absolute;
 }
 
 h1 {
   color: white;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 4vw;
-  margin: 2vw 4vw 0vw;
+  font-size: 51px;
+  margin: 25px 50px 0;
   /* outline: 1px dotted green; */
 }
 
 ul.horizontal {
-  margin: 2vw;
+  margin: 25px;
   padding: 0;
   text-align: center;
+  display: flex;
+  align-items: flex-start;
   /* outline: 1px dotted pink; */
 }
 ul.horizontal > li {
-  display: inline-block;
-  margin: 1vw;
+  display: flex;
+  margin: 10px;
   padding: 0;
-  height: 80vh;
+  height: 720px;
   /* outline: 1px dotted yellow; */
 }
 
@@ -40,9 +44,9 @@ ul.verticalLeft > li {
   display: flex;
   background-color: whitesmoke;
   /* outline: 1px dotted crimson; */
-  height: 25vh;
-  margin: 1.25vh 0 1.25vh 0;
-  border-radius: 25px;
+  width: 220px;
+  height: 220px;
+  margin: 12px 0;
 }
 
 ul.verticalRight{
@@ -53,22 +57,29 @@ ul.verticalRight{
 
 ul.verticalRight > li {
   display: flex;
+  width: 300px;
   background-color: whitesmoke;
   /* outline: 1px dotted crimson; */
-  height: 25vh;
-  margin: 10vh 0 10vh 0;
+  height: 300px;
+  margin: 40px 0;
 }
 
 #leftbar {
-  width: 16vw;
+  width: 220px;
+  display: flex;
 }
 
 #rightbar {
-  width: 16vw;
+  width: 300px;
+  display: flex;
 }
 
 #simulation {
-  width: 55vw;
+  width: 792px;
+}
+
+#rounded-corners {
+  border-radius: 25px;
 }
 
 canvas {
