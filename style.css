@@ -64,6 +64,18 @@ ul.verticalRight > li {
   margin: 40px 0;
 }
 
+h3.box-title {
+  margin: 20px auto;
+}
+
+.electron-toggle-button {
+ display: block;
+ margin: 15px auto; 
+ width: 180px;
+ height: 30px;
+ transition-duration: 0.4s;
+}
+
 #leftbar {
   width: 220px;
   display: flex;
@@ -80,6 +92,8 @@ ul.verticalRight > li {
 
 #rounded-corners {
   border-radius: 25px;
+  display: block;
+  padding: 2px;
 }
 
 canvas {
