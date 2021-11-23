@@ -18,6 +18,10 @@ h1 {
   /* outline: 1px dotted green; */
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+}
 ul.horizontal {
   margin: 25px;
   padding: 0;
@@ -74,6 +78,26 @@ h3.box-title {
  width: 180px;
  height: 30px;
  transition-duration: 0.4s;
+}
+
+.circle-button {
+  width: 60px;
+  height: 60px;
+  border: none;
+  margin: -20px 15px;
+  border-radius: 50%;
+
+}
+
+.circle-button:hover {
+  cursor: pointer;
+}
+
+.circle-button img {
+  width: 60px;
+  height: 60px;
+  vertical-align: middle;
+  margin: -15px -20px;
 }
 
 #leftbar {

@@ -23,8 +23,8 @@
     }
   </script>
 
-  <script type = "text/javascript" src="ui-components/sketch.js"></script>
-  <script type = "text/javascript" src="ui-components/sampleSelect.js"></script>
+  <script type="text/javascript" src="ui-components/sketch.js"></script>
+  <script type="text/javascript" src="ui-components/sampleSelect.js"></script>
 
 </head>
 
@@ -34,18 +34,25 @@
   <ul class="horizontal">
     <li id="leftbar">
       <!-- <ul class="verticalLeft" onclick = "setup()"> -->
-        <ul class="verticalLeft">
-        <li id = "rounded-corners">
-          <h3 class = "box-title">Simulation Controls</p>
+      <ul class="verticalLeft">
+        <li id="rounded-corners">
+          <h3 class="box-title">Simulation Controls</p>
+            <ul class = "inside-box">
+              <li>
+                <button class = "circle-button"><img src = "/../assets/pause.png"></button>
+                <button class = 'circle-button'><img src = "/../assets/restart.png"></button>
+              </li>
+            </ul>
+          
         </li>
-        <li id = "rounded-corners">
-          <h3 class = "box-title">Electron Toggles</h3>
-          <button class = "electron-toggle-button">Emitted</button>
-          <button class = "electron-toggle-button">Uncaptured</button>
-          <button class = "electron-toggle-button">Captured</button>
+        <li id="rounded-corners">
+          <h3 class="box-title">Electron Toggles</h3>
+          <button class="electron-toggle-button">Emitted</button>
+          <button class="electron-toggle-button">Uncaptured</button>
+          <button class="electron-toggle-button">Captured</button>
         </li>
-        <li id = "rounded-corners">
-          <h3 class = "box-title">Feature Selection</h3>
+        <li id="rounded-corners">
+          <h3 class="box-title">Feature Selection</h3>
         </li>
       </ul>
     </li>
@@ -59,10 +66,10 @@
     <li id="rightbar">
       <ul class="verticalRight">
         <li>
-          <h3 class = "box-title">Resulting SEM Image</p>
+          <h3 class="box-title">Resulting SEM Image</p>
         </li>
-        <li id = "rounded-corners">
-          <h3 class = "box-title">Isometric View of <br> Feature Topography</h3>
+        <li id="rounded-corners">
+          <h3 class="box-title">Isometric View of <br> Feature Topography</h3>
         </li>
       </ul>
     </li>
