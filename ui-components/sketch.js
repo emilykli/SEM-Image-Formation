@@ -1,8 +1,18 @@
 var canvasWidth, canvasHeight;
+var isPlaying;
+
+var simulationSpeed = 25;
+
+var maxElectronVelocity = 10;
+
+var electrons = [];
 
 function setup() {
   canvasWidth = 792;
   canvasHeight = 720;
+
+  isPlaying = false;
+
   var canvas = createCanvas(canvasWidth, canvasHeight);
   console.log(windowWidth * 0.55 + " " + windowHeight * 0.80);
 
@@ -13,17 +23,54 @@ function setup() {
   background(230);
 
   sample = new Sample("two_blocks");
+
+
+  electrons = [];
+
+  for (let i = 0; i < 20; i++) {
+    electrons.push({
+      x: random(250, 323),
+      y: -20 - 70 * i,
+      diameter: 20,
+      xVelocity: 0,
+      yVelocity: simulationSpeed / 100 * maxElectronVelocity,
+    });
+  }
+
+  console.log("is set up");
 }
 
 function draw() {
   background(230);
+
+  if (isPlaying) {
+    for (let i = 0; i < electrons.length; i++) {
+      electrons[i].x += electrons[i].xVelocity;
+      electrons[i].y += electrons[i].yVelocity;
+    }
+  }
+
+  console.log("simulation speed: " + simulationSpeed);
+
   drawSEMComponents();
+
+  for (let i = 0; i < electrons.length; i++) {
+    ellipse(electrons[i].x, electrons[i].y, electrons[i].diameter);
+  }
+
   sample.drawTwoBlocksStepped();
+}
+
+function playSimulation() {
+  isPlaying = true;
+}
+
+function pauseSimulation() {
+  isPlaying = false;
 }
 
 function drawSEMComponents() {
 
-  drawObjectiveLens();
   drawSecondaryDetector();
 
 }

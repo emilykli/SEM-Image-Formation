@@ -84,7 +84,7 @@ h3.box-title {
   width: 60px;
   height: 60px;
   border: none;
-  margin: -20px 15px;
+  margin: -2px 15px 20px 0px;
   border-radius: 50%;
 
 }
@@ -97,7 +97,16 @@ h3.box-title {
   width: 60px;
   height: 60px;
   vertical-align: middle;
-  margin: -15px -20px;
+  margin: -2px -20px;
+}
+
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+.slider {
+  width: 70%;
 }
 
 #leftbar {

@@ -39,8 +39,53 @@
           <h3 class="box-title">Simulation Controls</p>
             <ul class = "inside-box">
               <li>
-                <button class = "circle-button"><img src = "/../assets/pause.png"></button>
-                <button class = 'circle-button'><img src = "/../assets/restart.png"></button>
+                <button class = "circle-button" onclick = "swapPlayPause()"><img id = "play-pause-button" src = "/../assets/play.png"></button>
+                <script>
+                  var img_array = ["/../assets/play.png", "/../assets/pause.png"]
+                  var playPauseIndex = 0;
+                  function swapPlayPause()
+                  {
+                    // console.log("pressed");
+                    playPauseIndex = playPauseIndex + 1;
+                    playPauseIndex = playPauseIndex%2;
+                    document.getElementById("play-pause-button").src = img_array[playPauseIndex];
+
+                    if(playPauseIndex == 1) {
+                      playSimulation();
+                    }
+
+                    else {
+                      pauseSimulation();
+                    }
+                  }
+                </script>
+                <button class = 'circle-button' onclick = "resetButton()"><img src = "/../assets/restart.png"></button>
+                <script>
+                  function resetButton() {
+                    if(playPauseIndex == 1)
+                    {
+                      swapPlayPause();
+                    }
+                    setup();
+                  }
+                </script>
+              </li>
+              <li>
+                <div class="slidecontainer">
+                  <input type="range" min="1" max="100" value="25" class="slider" id="myRange" onclick = "sliderValueChanged()">
+                  <script>
+                    function sliderValueChanged() {
+                      // console.log(document.getElementById("myRange").value);
+                      simulationSpeed = document.getElementById("myRange").value;
+
+                      for(let i = 0; i < electrons.length; i++)
+                      {
+                        electrons[i].yVelocity = simulationSpeed / 100 * maxElectronVelocity;
+                      }
+                    }
+                  </script>
+                </div>
+                <div>Animation Speed</div>
               </li>
             </ul>
           
