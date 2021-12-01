@@ -1,15 +1,23 @@
-var canvasWidth, canvasHeight;
+var canvasWidth = 792;
+var canvasHeight = 720;
+
 var isPlaying;
+
+var canvasCenter = canvasWidth / 2;
+var objectiveLensHalfWidth = 100;
+var objectiveLensHeight = 50;
+
 
 var simulationSpeed = 25;
 
 var maxElectronVelocity = 10;
 
+var beamLeftBound, beamRightBound;
+var stage; //goes from 1 up to 5 for the 5 different "sections" of a cross section
+
 var electrons = [];
 
 function setup() {
-  canvasWidth = 792;
-  canvasHeight = 720;
 
   isPlaying = false;
 
@@ -24,15 +32,19 @@ function setup() {
 
   sample = new Sample("two_blocks");
 
+  stage = 1;
+  beamLeftBound = 250; //each stage is 73 px wide
+  beamRightBound = 323;
+
 
   electrons = [];
 
   for (let i = 0; i < 20; i++) {
     electrons.push({
-      x: random(250, 323),
-      y: -20 - 70 * i,
-      diameter: 20,
-      xVelocity: 0,
+      x: canvasCenter + i * 20* simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight) + random(0, 30),
+      y: -20 - simulationSpeed / 100 * maxElectronVelocity * i * 20,
+      diameter: 10,
+      xVelocity: -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight),
       yVelocity: simulationSpeed / 100 * maxElectronVelocity,
     });
   }
@@ -52,11 +64,15 @@ function draw() {
 
   console.log("simulation speed: " + simulationSpeed);
 
-  drawSEMComponents();
+  drawWrapperBeam();
 
+  fill(255);
   for (let i = 0; i < electrons.length; i++) {
     ellipse(electrons[i].x, electrons[i].y, electrons[i].diameter);
   }
+
+  drawObjectiveLens();
+  drawSEMComponents();
 
   sample.drawTwoBlocksStepped();
 }
@@ -76,16 +92,13 @@ function drawSEMComponents() {
 }
 
 function drawObjectiveLens() {
-  var canvasCenter = canvasWidth / 2;
-  var objectiveLensHalfWidth = 100;
-  var objectiveLensHeight = 50;
 
   fill(80);
   beginShape(TESS);
   vertex(canvasCenter - objectiveLensHalfWidth, 0);
   vertex(canvasCenter + objectiveLensHalfWidth, 0);
-  vertex(canvasCenter + objectiveLensHalfWidth / 2, objectiveLensHeight);
-  vertex(canvasCenter - objectiveLensHalfWidth / 2, objectiveLensHeight);
+  vertex(canvasCenter + 73 / 2, objectiveLensHeight);
+  vertex(canvasCenter - 73 / 2, objectiveLensHeight);
   vertex(canvasCenter - objectiveLensHalfWidth, 0);
   endShape(CLOSE);
 
@@ -93,6 +106,18 @@ function drawObjectiveLens() {
   noStroke();
   fill(255);
   text("Objective Lens", canvasCenter, 30);
+  stroke(1);
+}
+
+function drawWrapperBeam() {
+  noStroke();
+  fill(30);
+  beginShape(TESS);
+  vertex(canvasCenter - 73/2, objectiveLensHeight);
+  vertex(canvasCenter + 73/2, objectiveLensHeight);
+  vertex(beamRightBound, 623.5);
+  vertex(beamLeftBound, 623.5);
+  endShape(CLOSE);
   stroke(1);
 }
 
