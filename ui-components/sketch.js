@@ -40,13 +40,13 @@ function setup() {
   electrons = [];
 
   for (let i = 0; i < 20; i++) {
-    electrons.push({
-      x: canvasCenter + i * 20* simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight) + random(0, 30),
-      y: -20 - simulationSpeed / 100 * maxElectronVelocity * i * 20,
-      diameter: 10,
-      xVelocity: -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight),
-      yVelocity: simulationSpeed / 100 * maxElectronVelocity,
-    });
+    let xCoord = canvasCenter + i * 20* simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight) + random(0, 30);
+    let yCoord = -20 - simulationSpeed / 100 * maxElectronVelocity * i * 20;
+    let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight);
+    let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
+    let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity);
+
+    electrons.push(newElectron);
   }
 
   console.log("is set up");
@@ -57,8 +57,9 @@ function draw() {
 
   if (isPlaying) {
     for (let i = 0; i < electrons.length; i++) {
-      electrons[i].x += electrons[i].xVelocity;
-      electrons[i].y += electrons[i].yVelocity;
+      electrons[i].x += electrons[i].xVel;
+      electrons[i].y += electrons[i].yVel;
+      electrons[i].collisionMath(0, 0);
     }
   }
 

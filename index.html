@@ -24,7 +24,11 @@
   </script>
 
   <script type="text/javascript" src="ui-components/sketch.js"></script>
+  <script type="text/javascript" src="ui-components/electrons.js"></script>
   <script type="text/javascript" src="ui-components/sampleSelect.js"></script>
+
+  <script src="https://cdn.JsDelivr.net/gh/bmoren/p5.collide2D/p5.collide2d.min.js"></script>
+
 
 </head>
 
@@ -80,7 +84,8 @@
 
                       for(let i = 0; i < electrons.length; i++)
                       {
-                        electrons[i].yVelocity = simulationSpeed / 100 * maxElectronVelocity;
+                        electrons[i].yVel = simulationSpeed / 100 * maxElectronVelocity;
+                        electrons[i].xVel = -electrons[i].yVel * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight);
                       }
                     }
                   </script>
