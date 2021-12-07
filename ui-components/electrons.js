@@ -10,6 +10,7 @@ class Electron {
         this.distanceFromDetectorX = abs(this.x - secondaryDetectorCenterX);
         this.distanceFromDetectorY = abs(this.y - secondaryDetectorCenterY);
         this.distance = sqrt(this.distanceFromDetectorX * this.distanceFromDetectorX + this.distanceFromDetectorY * this.distanceFromDetectorY);
+        this.collidedWithDetector = false;
     }
 
     collisionMathSteppedBlock(leftBound, rightBound) {
@@ -41,5 +42,14 @@ class Electron {
           this.x -= 200/this.distance;
       }
       this.x -= 100/this.distance
+    }
+
+    secondaryDetectorCollision() {
+        if(collideRectCircle(10, 200, 180, 70, this.x, this.y, this.diameter) && this.collidedWithDetector == false)
+        {
+            this.diameter = 0;
+            this.collidedWithDetector = true;
+            electronCount += 10;
+        }
     }
 }

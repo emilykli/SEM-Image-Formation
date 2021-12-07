@@ -20,9 +20,13 @@ var stage; //goes from 1 up to 5 for the 5 different "sections" of a cross secti
 
 var electrons = [];
 
+var electronCount = 0;
+
 function setup() {
 
   isPlaying = false;
+
+  electronCount = 0;
 
   initialPress = 0;
 
@@ -71,6 +75,8 @@ function draw() {
       electrons[i].x += electrons[i].xVel;
       electrons[i].y += electrons[i].yVel;
       electrons[i].collisionMathSteppedBlock(0, 0);
+
+      electrons[i].secondaryDetectorCollision();
 
       if(electrons[i].hasMadeContact) {
         electrons[i].electronDriftMath();
