@@ -24,6 +24,7 @@
   </script>
 
   <script type="text/javascript" src="ui-components/sketch.js"></script>
+  <script type="text/javascript" src="ui-components/resultingImage.js"></script>
   <script type="text/javascript" src="ui-components/electrons.js"></script>
   <script type="text/javascript" src="ui-components/sampleSelect.js"></script>
 
@@ -41,20 +42,20 @@
       <ul class="verticalLeft">
         <li id="rounded-corners">
           <h3 class="box-title">Simulation Controls</p>
-            <ul class = "inside-box">
+            <ul class="inside-box">
               <li>
-                <button class = "circle-button" onclick = "swapPlayPause()"><img id = "play-pause-button" src = "/../assets/play.png"></button>
+                <button class="circle-button" onclick="swapPlayPause()"><img id="play-pause-button"
+                    src="/../assets/play.png"></button>
                 <script>
                   var img_array = ["/../assets/play.png", "/../assets/pause.png"]
                   var playPauseIndex = 0;
-                  function swapPlayPause()
-                  {
+                  function swapPlayPause() {
                     // console.log("pressed");
                     playPauseIndex = playPauseIndex + 1;
-                    playPauseIndex = playPauseIndex%2;
+                    playPauseIndex = playPauseIndex % 2;
                     document.getElementById("play-pause-button").src = img_array[playPauseIndex];
 
-                    if(playPauseIndex == 1) {
+                    if (playPauseIndex == 1) {
                       playSimulation();
                     }
 
@@ -63,11 +64,10 @@
                     }
                   }
                 </script>
-                <button class = 'circle-button' onclick = "resetButton()"><img src = "/../assets/restart.png"></button>
+                <button class='circle-button' onclick="resetButton()"><img src="/../assets/restart.png"></button>
                 <script>
                   function resetButton() {
-                    if(playPauseIndex == 1)
-                    {
+                    if (playPauseIndex == 1) {
                       swapPlayPause();
                     }
                     setup();
@@ -76,16 +76,16 @@
               </li>
               <li>
                 <div class="slidecontainer">
-                  <input type="range" min="1" max="100" value="25" class="slider" id="myRange" onclick = "sliderValueChanged()">
+                  <input type="range" min="1" max="100" value="25" class="slider" id="myRange"
+                    onclick="sliderValueChanged()">
                   <script>
                     function sliderValueChanged() {
                       // console.log(document.getElementById("myRange").value);
                       simulationSpeed = document.getElementById("myRange").value;
 
-                      for(let i = 0; i < electrons.length; i++)
-                      {
+                      for (let i = 0; i < electrons.length; i++) {
                         electrons[i].yVel = simulationSpeed / 100 * maxElectronVelocity;
-                        electrons[i].xVel = -electrons[i].yVel * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight);
+                        electrons[i].xVel = -electrons[i].yVel * (canvasCenter - 73 / 2 - beamLeftBound) / (623.5 - objectiveLensHeight);
                       }
                     }
                   </script>
@@ -93,7 +93,7 @@
                 <div>Animation Speed</div>
               </li>
             </ul>
-          
+
         </li>
         <li id="rounded-corners">
           <h3 class="box-title">Electron Toggles</h3>
@@ -117,6 +117,7 @@
       <ul class="verticalRight">
         <li>
           <h3 class="box-title">Resulting SEM Image</p>
+            <div id = 'resulting-image'></div>
         </li>
         <li id="rounded-corners">
           <h3 class="box-title">Isometric View of <br> Feature Topography</h3>

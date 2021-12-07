@@ -1,11 +1,14 @@
 var canvasWidth = 792;
 var canvasHeight = 720;
 
-var isPlaying;
+var isPlaying, initialPress;
 
 var canvasCenter = canvasWidth / 2;
 var objectiveLensHalfWidth = 100;
 var objectiveLensHeight = 50;
+
+var secondaryDetectorCenterX;
+var secondaryDetectorCenterY;
 
 
 var simulationSpeed = 25;
@@ -21,8 +24,10 @@ function setup() {
 
   isPlaying = false;
 
+  initialPress = 0;
+
   var canvas = createCanvas(canvasWidth, canvasHeight);
-  console.log(windowWidth * 0.55 + " " + windowHeight * 0.80);
+  // console.log(windowWidth * 0.55 + " " + windowHeight * 0.80);
 
   // Move the canvas so it’s inside our <div id="sketch-holder">.
   canvas.parent('sketch-holder');
@@ -39,33 +44,46 @@ function setup() {
 
   electrons = [];
 
-  for (let i = 0; i < 20; i++) {
-    let xCoord = canvasCenter + i * 20* simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight) + random(0, 30);
+  for (let i = 0; i < 25; i++) {
+    let xCoord = canvasCenter + i * 20 * simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 - beamLeftBound) / (623.5 - objectiveLensHeight) + random(0, 30);
     let yCoord = -20 - simulationSpeed / 100 * maxElectronVelocity * i * 20;
-    let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73/2 - beamLeftBound)/(623.5-objectiveLensHeight);
+    let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 - beamLeftBound) / (623.5 - objectiveLensHeight);
     let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
     let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity);
 
     electrons.push(newElectron);
   }
 
-  console.log("is set up");
+  // console.log("is set up");
 }
 
 function draw() {
   background(230);
 
+  if(initialPress != 0)
+  {
+    drawWrapperBeam();
+  }
+
   if (isPlaying) {
-    for (let i = 0; i < electrons.length; i++) {
+    
+    for (let i = electrons.length - 1; i >= 0; i -= 1) {
       electrons[i].x += electrons[i].xVel;
       electrons[i].y += electrons[i].yVel;
-      electrons[i].collisionMath(0, 0);
+      electrons[i].collisionMathSteppedBlock(0, 0);
+
+      if(electrons[i].hasMadeContact) {
+        electrons[i].electronDriftMath();
+      }
+
+      electrons[i].distanceFromDetectorX = abs(electrons[i].x - secondaryDetectorCenterX);
+      electrons[i].distanceFromDetectorY = abs(electrons[i].y - secondaryDetectorCenterY);
+      electrons[i].distance = sqrt(electrons[i].distanceFromDetectorX * electrons[i].distanceFromDetectorX + electrons[i].distanceFromDetectorY * electrons[i].distanceFromDetectorY);
+
     }
   }
 
-  console.log("simulation speed: " + simulationSpeed);
-
-  drawWrapperBeam();
+  // console.log("simulation speed: " + simulationSpeed);
 
   fill(255);
   for (let i = 0; i < electrons.length; i++) {
@@ -80,6 +98,11 @@ function draw() {
 
 function playSimulation() {
   isPlaying = true;
+
+  if(initialPress == 0)
+  {
+    initialPress = 1;
+  }
 }
 
 function pauseSimulation() {
@@ -114,8 +137,8 @@ function drawWrapperBeam() {
   noStroke();
   fill(30);
   beginShape(TESS);
-  vertex(canvasCenter - 73/2, objectiveLensHeight);
-  vertex(canvasCenter + 73/2, objectiveLensHeight);
+  vertex(canvasCenter - 73 / 2, objectiveLensHeight);
+  vertex(canvasCenter + 73 / 2, objectiveLensHeight);
   vertex(beamRightBound, 623.5);
   vertex(beamLeftBound, 623.5);
   endShape(CLOSE);
@@ -128,6 +151,9 @@ function drawSecondaryDetector() {
 
   var secondaryDetectorHeight = 70;
   var secondaryDetectorWidth = 180;
+
+  secondaryDetectorCenterX = translateX + secondaryDetectorWidth/2;
+  secondaryDetectorCenterY = translateY + secondaryDetectorHeight/2;
 
   translate(translateX, translateY);
   fill(80);
