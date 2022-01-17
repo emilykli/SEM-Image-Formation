@@ -42,35 +42,33 @@ function setup() {
   sample = new Sample("two_blocks");
 
   stage = 1;
-  beamLeftBound = 250; //each stage is 73 px wide
-  beamRightBound = 323;
+  beamLeftBound = 270; //each stage is 73 px wide
+  beamRightBound = 303;
 
 
   electrons = [];
 
   for (let i = 0; i < 25; i++) {
-    let xCoord = canvasCenter + i * 20 * simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 - beamLeftBound) / (623.5 - objectiveLensHeight) + random(0, 30);
+    let xCoord = canvasCenter + i * 20 * simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) + random(0, 30);
     let yCoord = -20 - simulationSpeed / 100 * maxElectronVelocity * i * 20;
-    let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 - beamLeftBound) / (623.5 - objectiveLensHeight);
+    let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
     let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
     let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity);
 
     electrons.push(newElectron);
   }
-
   // console.log("is set up");
 }
 
 function draw() {
   background(230);
 
-  if(initialPress != 0)
-  {
+  if (initialPress != 0) {
     drawWrapperBeam();
   }
 
   if (isPlaying) {
-    
+
     for (let i = electrons.length - 1; i >= 0; i -= 1) {
       electrons[i].x += electrons[i].xVel;
       electrons[i].y += electrons[i].yVel;
@@ -78,7 +76,7 @@ function draw() {
 
       electrons[i].secondaryDetectorCollision();
 
-      if(electrons[i].hasMadeContact) {
+      if (electrons[i].hasMadeContact) {
         electrons[i].electronDriftMath();
       }
 
@@ -105,8 +103,7 @@ function draw() {
 function playSimulation() {
   isPlaying = true;
 
-  if(initialPress == 0)
-  {
+  if (initialPress == 0) {
     initialPress = 1;
   }
 }
@@ -143,8 +140,8 @@ function drawWrapperBeam() {
   noStroke();
   fill(30);
   beginShape(TESS);
-  vertex(canvasCenter - 73 / 2, objectiveLensHeight);
-  vertex(canvasCenter + 73 / 2, objectiveLensHeight);
+  vertex(canvasCenter - 73 / 2 + 20, objectiveLensHeight);
+  vertex(canvasCenter + 73 / 2 - 20, objectiveLensHeight);
   vertex(beamRightBound, 623.5);
   vertex(beamLeftBound, 623.5);
   endShape(CLOSE);
@@ -158,8 +155,8 @@ function drawSecondaryDetector() {
   var secondaryDetectorHeight = 70;
   var secondaryDetectorWidth = 180;
 
-  secondaryDetectorCenterX = translateX + secondaryDetectorWidth/2;
-  secondaryDetectorCenterY = translateY + secondaryDetectorHeight/2;
+  secondaryDetectorCenterX = translateX + secondaryDetectorWidth / 2;
+  secondaryDetectorCenterY = translateY + secondaryDetectorHeight / 2;
 
   translate(translateX, translateY);
   fill(80);

@@ -85,7 +85,7 @@
 
                       for (let i = 0; i < electrons.length; i++) {
                         electrons[i].yVel = simulationSpeed / 100 * maxElectronVelocity;
-                        electrons[i].xVel = -electrons[i].yVel * (canvasCenter - 73 / 2 - beamLeftBound) / (623.5 - objectiveLensHeight);
+                        electrons[i].xVel = -electrons[i].yVel * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
                       }
                     }
                   </script>
@@ -96,10 +96,55 @@
 
         </li>
         <li id="rounded-corners">
-          <h3 class="box-title">Electron Toggles</h3>
-          <button class="electron-toggle-button">Emitted</button>
-          <button class="electron-toggle-button">Uncaptured</button>
-          <button class="electron-toggle-button">Captured</button>
+          <h3 class="box-title">Electron Color Toggles</h3>
+          <button class="electron-toggle-button" id = "emitted" onclick="emittedColorToggle()" style = "">Emitted</button>
+          <button class="electron-toggle-button" id = "uncaptured" onclick="uncapturedColorToggle()" style = "">Uncaptured</button>
+          <button class="electron-toggle-button" id= "captured" onclick="capturedColorToggle()" style = "">Captured</button>
+
+          <script>
+            var emitted = false;
+            var uncaptured = false;
+            var captured = false;
+
+            function emittedColorToggle() {
+              if (emitted == false)
+              {
+                emitted = true;
+                document.getElementById("emitted").style = "background-color: FireBrick; color:white;";
+              }
+              else {
+                emitted = false;
+                document.getElementById("emitted").style = "";
+              }
+
+            }
+
+            function uncapturedColorToggle() {
+              if (uncaptured == false)
+              {
+                uncaptured = true;
+                document.getElementById("uncaptured").style = "background-color: SeaGreen; color:white";
+              }
+              else {
+                uncaptured = false;
+                document.getElementById("uncaptured").style = "";
+              }
+
+            }
+
+            function capturedColorToggle() {
+              if (captured == false)
+              {
+                captured = true;
+                document.getElementById("captured").style = "background-color: GoldenRod; color:white";
+              }
+              else {
+                captured = false;
+                document.getElementById("captured").style = "";
+              }
+
+            }
+          </script>
         </li>
         <li id="rounded-corners">
           <h3 class="box-title">Feature Selection</h3>
@@ -115,12 +160,13 @@
 
     <li id="rightbar">
       <ul class="verticalRight">
-        <li>
+        <li id>
           <h3 class="box-title">Resulting SEM Image</p>
-            <div id = 'resulting-image'></div>
+            <div id='resulting-image'></div>
         </li>
         <li id="rounded-corners">
           <h3 class="box-title">Isometric View of <br> Feature Topography</h3>
+          <img id = "rectangle">
         </li>
       </ul>
     </li>

@@ -49,7 +49,7 @@ class Electron {
         {
             this.diameter = 0;
             this.collidedWithDetector = true;
-            electronCount += 10;
+            electronCount += 8;
         }
     }
 }
