@@ -97,9 +97,11 @@
         </li>
         <li id="rounded-corners">
           <h3 class="box-title">Electron Color Toggles</h3>
-          <button class="electron-toggle-button" id = "emitted" onclick="emittedColorToggle()" style = "">Emitted</button>
-          <button class="electron-toggle-button" id = "uncaptured" onclick="uncapturedColorToggle()" style = "">Uncaptured</button>
-          <button class="electron-toggle-button" id= "captured" onclick="capturedColorToggle()" style = "">Captured</button>
+          <button class="electron-toggle-button" id="emitted" onclick="emittedColorToggle()" style="">Emitted</button>
+          <button class="electron-toggle-button" id="uncaptured" onclick="uncapturedColorToggle()"
+            style="">Uncaptured</button>
+          <button class="electron-toggle-button" id="captured" onclick="capturedColorToggle()"
+            style="">Captured</button>
 
           <script>
             var emitted = false;
@@ -107,8 +109,7 @@
             var captured = false;
 
             function emittedColorToggle() {
-              if (emitted == false)
-              {
+              if (emitted == false) {
                 emitted = true;
                 document.getElementById("emitted").style = "background-color: FireBrick; color:white;";
               }
@@ -120,8 +121,7 @@
             }
 
             function uncapturedColorToggle() {
-              if (uncaptured == false)
-              {
+              if (uncaptured == false) {
                 uncaptured = true;
                 document.getElementById("uncaptured").style = "background-color: SeaGreen; color:white";
               }
@@ -133,8 +133,7 @@
             }
 
             function capturedColorToggle() {
-              if (captured == false)
-              {
+              if (captured == false) {
                 captured = true;
                 document.getElementById("captured").style = "background-color: GoldenRod; color:white";
               }
@@ -148,6 +147,106 @@
         </li>
         <li id="rounded-corners">
           <h3 class="box-title">Feature Selection</h3>
+          <button class="feature-select-button" id="rectangle-select" style="background-color: rgb(184, 184, 184)"
+            onclick="featureSelectionButton('two_blocks')">Rectangle</button>
+          <button class="feature-select-button" id="pyramid-select" style=""
+            onclick="featureSelectionButton('pyramid')">Pyramid</button>
+
+          <button class="feature-select-button" id="dome-select" style=""
+            onclick="featureSelectionButton('dome')">Dome</button>
+          <button class="feature-select-button" id="spire-select" style=""
+            onclick="featureSelectionButton('spire')">Spire</button>
+
+          <button class="feature-select-button" id="inverted-pyramid-select" style=""
+            onclick="featureSelectionButton('inverted_pyramid')">Inverted
+            Pyramid</button>
+
+          <script>
+            function featureSelectionButton(shape) {
+              switch (shape) {
+                case 'two_blocks': {
+                  document.getElementById("pyramid-select").style = ""
+                  document.getElementById("dome-select").style = ""
+                  document.getElementById("spire-select").style = ""
+                  document.getElementById("inverted-pyramid-select").style = ""
+                  document.getElementById("rectangle-select").style = "background-color: rgb(184, 184, 184)"
+
+                  globalShape = 'two_blocks';
+                  topographyIndex = 0;
+
+                  document.getElementById("isoImage").src = "/../assets/rect1.png";
+
+                  sample = new Sample("two_blocks")
+
+                  break;
+                }
+
+                case 'dome': {
+                  document.getElementById("pyramid-select").style = ""
+                  document.getElementById("rectangle-select").style = ""
+                  document.getElementById("spire-select").style = ""
+                  document.getElementById("inverted-pyramid-select").style = ""
+                  document.getElementById("dome-select").style = "background-color: rgb(184, 184, 184)"
+
+                  globalShape = 'dome';
+                  topographyIndex = 0;
+
+                  document.getElementById("isoImage").src = "/../assets/dome2.png";
+
+                  sample = new Sample("dome")
+                  break;
+                }
+
+                case "pyramid": {
+                  document.getElementById("rectangle-select").style = ""
+                  document.getElementById("dome-select").style = ""
+                  document.getElementById("spire-select").style = ""
+                  document.getElementById("inverted-pyramid-select").style = ""
+                  document.getElementById("pyramid-select").style = "background-color: rgb(184, 184, 184)"
+
+                  globalShape = 'pyramid';
+                  topographyIndex = 0;
+
+                  document.getElementById("isoImage").src = "/../assets/pyramid2.png";
+
+                  sample = new Sample("pyramid")
+                  break;
+                }
+
+                case "spire": {
+                  document.getElementById("pyramid-select").style = ""
+                  document.getElementById("dome-select").style = ""
+                  document.getElementById("rectangle-select").style = ""
+                  document.getElementById("inverted-pyramid-select").style = ""
+                  document.getElementById("spire-select").style = "background-color: rgb(184, 184, 184)"
+
+                  globalShape = 'spire';
+                  topographyIndex = 0;
+
+                  document.getElementById("isoImage").src = "/../assets/spire2.png";
+
+                  sample = new Sample("spire")
+                  break;
+                }
+
+                case "inverted_pyramid": {
+                  document.getElementById("pyramid-select").style = ""
+                  document.getElementById("dome-select").style = ""
+                  document.getElementById("spire-select").style = ""
+                  document.getElementById("rectangle-select").style = ""
+                  document.getElementById("inverted-pyramid-select").style = "background-color: rgb(184, 184, 184)"
+
+                  globalShape = 'inverted_pyramid';
+                  topographyIndex = 0;
+
+                  document.getElementById("isoImage").src = "/../assets/invertedpyramid2.png";
+
+                  sample = new Sample("inverted_pyramid")
+                  break;
+                }
+              }
+            }
+          </script>
         </li>
       </ul>
     </li>
@@ -166,7 +265,56 @@
         </li>
         <li id="rounded-corners">
           <h3 class="box-title">Isometric View of <br> Feature Topography</h3>
-          <img id = "rectangle">
+          <img id="isoImage" src="../assets/rect1.png">
+          <p></p>
+          <ul class="inside-box">
+            <li>
+              <button onclick="changeIsometricImage(-1)"><</button>
+              <button onclick="changeIsometricImage(1)">></button>
+
+                  <script>
+
+                    var rectImages = ["/../assets/rect1.png", "/../assets/rect2.png", "/../assets/rect3.png", "/../assets/rect4.png", "/../assets/rect5.png"];
+                    var domeImages = ["/../assets/dome2.png", "/../assets/dome4.png", "/../assets/dome6.png", "/../assets/dome8.png", "/../assets/dome10.png"];
+                    var invertedPyramidImages = ["/../assets/invertedpyramid2.png", "/../assets/invertedpyramid4.png", "/../assets/invertedpyramid6.png", "/../assets/invertedpyramid8.png", "/../assets/invertedpyramid10.png"];
+                    var pyramidImages = ["/../assets/pyramid2.png", "/../assets/pyramid4.png", "/../assets/pyramid6.png", "/../assets/pyramid8.png", "/../assets/pyramid10.png"];
+                    var spireImages = ["/../assets/spire2.png", "/../assets/spire4.png", "/../assets/spire6.png", "/../assets/spire8.png", "/../assets/spire10.png"];
+
+                    function changeIsometricImage(indexChange) {
+                      topographyIndex += indexChange;
+                      if (topographyIndex < 0) {
+                        topographyIndex = 4;
+                      }
+                      if (topographyIndex > 4) {
+                        topographyIndex = 0;
+                      }
+
+                      switch(globalShape) {
+                        case 'two_blocks': {
+                          document.getElementById("isoImage").src = rectImages[topographyIndex];
+                          break;
+                        }
+                        case 'dome': {
+                          document.getElementById("isoImage").src = domeImages[topographyIndex];
+                          break;
+                        }
+                        case 'inverted_pyramid': {
+                          document.getElementById("isoImage").src = invertedPyramidImages[topographyIndex];
+                          break;
+                        }
+                        case 'pyramid': {
+                          document.getElementById("isoImage").src = pyramidImages[topographyIndex];
+                          break;
+                        }
+                        case 'spire': {
+                          document.getElementById("isoImage").src = spireImages[topographyIndex];
+                          break;
+                        }
+                      }
+                    }
+                  </script>
+            </li>
+          </ul>
         </li>
       </ul>
     </li>

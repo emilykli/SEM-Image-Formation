@@ -22,6 +22,10 @@ var electrons = [];
 
 var electronCount = 0;
 
+var globalShape = 'two_blocks';
+
+var topographyIndex = 0;
+
 function setup() {
 
   isPlaying = false;
@@ -63,6 +67,8 @@ function setup() {
 function draw() {
   background(230);
 
+  console.log(globalShape);
+
   if (initialPress != 0) {
     drawWrapperBeam();
   }
@@ -97,7 +103,7 @@ function draw() {
   drawObjectiveLens();
   drawSEMComponents();
 
-  sample.drawTwoBlocksStepped();
+  sample.drawSample();
 }
 
 function playSimulation() {

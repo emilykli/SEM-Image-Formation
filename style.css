@@ -100,6 +100,11 @@ h3.box-title {
   margin: -2px -20px;
 }
 
+.feature-select-button {
+  margin: 2px;
+  width: 90px;
+  height: 45px;
+}
 
 .slidecontainer {
   width: 100%; /* Width of the outside container */
@@ -128,6 +133,13 @@ h3.box-title {
   display: block;
   padding: 2px;
 }
+
+#isoImage {
+  height: 165px;
+  width: auto;
+}
+
+
 
 canvas {
   display: block;
