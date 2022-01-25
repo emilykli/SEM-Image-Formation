@@ -45,9 +45,9 @@
             <ul class="inside-box">
               <li>
                 <button class="circle-button" onclick="swapPlayPause()"><img id="play-pause-button"
-                    src="/assets/play.png"></button>
+                    src="assets/play.png"></button>
                 <script>
-                  var img_array = ["/assets/play.png", "/assets/pause.png"]
+                  var img_array = ["assets/play.png", "assets/pause.png"]
                   var playPauseIndex = 0;
                   function swapPlayPause() {
                     // console.log("pressed");
@@ -64,7 +64,7 @@
                     }
                   }
                 </script>
-                <button class='circle-button' onclick="resetButton()"><img src="/assets/restart.png"></button>
+                <button class='circle-button' onclick="resetButton()"><img src="assets/restart.png"></button>
                 <script>
                   function resetButton() {
                     if (playPauseIndex == 1) {
@@ -174,7 +174,7 @@
                   globalShape = 'two_blocks';
                   topographyIndex = 0;
 
-                  document.getElementById("isoImage").src = "/assets/rect1.png";
+                  document.getElementById("isoImage").src = "assets/rect1.png";
 
                   sample = new Sample("two_blocks")
 
@@ -191,7 +191,7 @@
                   globalShape = 'dome';
                   topographyIndex = 0;
 
-                  document.getElementById("isoImage").src = "/assets/dome2.png";
+                  document.getElementById("isoImage").src = "assets/dome2.png";
 
                   sample = new Sample("dome")
                   break;
@@ -207,7 +207,7 @@
                   globalShape = 'pyramid';
                   topographyIndex = 0;
 
-                  document.getElementById("isoImage").src = "/assets/pyramid2.png";
+                  document.getElementById("isoImage").src = "assets/pyramid2.png";
 
                   sample = new Sample("pyramid")
                   break;
@@ -223,7 +223,7 @@
                   globalShape = 'spire';
                   topographyIndex = 0;
 
-                  document.getElementById("isoImage").src = "/assets/spire2.png";
+                  document.getElementById("isoImage").src = "assets/spire2.png";
 
                   sample = new Sample("spire")
                   break;
@@ -239,7 +239,7 @@
                   globalShape = 'inverted_pyramid';
                   topographyIndex = 0;
 
-                  document.getElementById("isoImage").src = "/assets/invertedpyramid2.png";
+                  document.getElementById("isoImage").src = "assets/invertedpyramid2.png";
 
                   sample = new Sample("inverted_pyramid")
                   break;
@@ -265,7 +265,7 @@
         </li>
         <li id="rounded-corners">
           <h3 class="box-title">Isometric View of <br> Feature Topography</h3>
-          <img id="isoImage" src="../assets/rect1.png">
+          <img id="isoImage" src="assets/rect1.png">
           <p></p>
           <ul class="inside-box">
             <li>
@@ -274,11 +274,11 @@
 
                   <script>
 
-                    var rectImages = ["/assets/rect1.png", "/assets/rect2.png", "/assets/rect3.png", "/assets/rect4.png", "/assets/rect5.png"];
-                    var domeImages = ["/assets/dome2.png", "/assets/dome4.png", "/assets/dome6.png", "/assets/dome8.png", "/assets/dome10.png"];
-                    var invertedPyramidImages = ["/assets/invertedpyramid2.png", "/assets/invertedpyramid4.png", "/assets/invertedpyramid6.png", "/assets/invertedpyramid8.png", "/assets/invertedpyramid10.png"];
-                    var pyramidImages = ["/assets/pyramid2.png", "/assets/pyramid4.png", "/assets/pyramid6.png", "/assets/pyramid8.png", "/assets/pyramid10.png"];
-                    var spireImages = ["/assets/spire2.png", "/assets/spire4.png", "/assets/spire6.png", "/assets/spire8.png", "/assets/spire10.png"];
+                    var rectImages = ["assets/rect1.png", "assets/rect2.png", "assets/rect3.png", "assets/rect4.png", "assets/rect5.png"];
+                    var domeImages = ["assets/dome2.png", "assets/dome4.png", "assets/dome6.png", "assets/dome8.png", "assets/dome10.png"];
+                    var invertedPyramidImages = ["assets/invertedpyramid2.png", "assets/invertedpyramid4.png", "assets/invertedpyramid6.png", "assets/invertedpyramid8.png", "assets/invertedpyramid10.png"];
+                    var pyramidImages = ["assets/pyramid2.png", "assets/pyramid4.png", "assets/pyramid6.png", "assets/pyramid8.png", "assets/pyramid10.png"];
+                    var spireImages = ["assets/spire2.png", "assets/spire4.png", "assets/spire6.png", "assets/spire8.png", "assets/spire10.png"];
 
                     function changeIsometricImage(indexChange) {
                       topographyIndex += indexChange;
