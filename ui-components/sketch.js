@@ -119,10 +119,10 @@ function draw() {
     }
     let allOutOfFrameTemp = true;
     for (let i = 0; i < electrons.length; i++) {
-      console.log(i + " " + electrons[i].outOfFrame);
+      //console.log(i + " " + electrons[i].outOfFrame);
       if (electrons[i].outOfFrame == false) {
         allOutOfFrameTemp = false;
-        console.log(i);
+        //console.log(i);
       }
     }
     if (allOutOfFrameTemp == true) {
@@ -154,6 +154,11 @@ function draw() {
         }
       }
       else {
+        if(topographyIndex == 4) {
+          console.log("hi")
+          swapPlayPause();
+        }
+        else {
         topographyIndex += 1;
         sectionIndex = 0;
         playPause = false;
@@ -185,6 +190,7 @@ function draw() {
             break;
           }
         }
+      }
       }
     }
   }
