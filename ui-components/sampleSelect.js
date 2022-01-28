@@ -66,6 +66,7 @@ class Sample {
 
         if (topographyIndex == 0 || topographyIndex == 4) {
             rect(0, 73.5, 365, 73.5);
+            translate(-translateX, -translateY);
         }
         else {
             beginShape(TESS);
@@ -109,6 +110,7 @@ class Sample {
         if(topographyIndex == 3) {
             arc(182.5, 73.5, 228, 228, PI, 2*PI);
         }
+        translate(-translateX, -translateY);
     }
 
     drawPyramid() {
@@ -149,6 +151,7 @@ class Sample {
         }
 
         rect(0, 73.5, 365, 73.5);
+        translate(-translateX, -translateY);
     }
 
     drawSpire() {
@@ -209,6 +212,7 @@ class Sample {
             curveVertex(322,0);
             endShape();
         }
+        translate(-translateX, -translateY);
     }
 
     drawInvertedPyramid() {
@@ -228,6 +232,6 @@ class Sample {
             vertex(182.5, 73.5);
             endShape(CLOSE);
         }
-        
+        translate(-translateX, -translateY); 
     }
 }

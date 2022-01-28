@@ -26,9 +26,19 @@ var globalShape = 'two_blocks';
 
 var topographyIndex = 0;
 
+var sectionIndex = 0; //help?
+
+var allMadeContact = false;
+
+var allOutOfFrame = false;
+
 function setup() {
 
   isPlaying = false;
+
+  allMadeContact = false;
+
+  allOutOfFrame = false;
 
   electronCount = 0;
 
@@ -67,9 +77,9 @@ function setup() {
 function draw() {
   background(230);
 
-  console.log(globalShape);
+  //console.log(globalShape);
 
-  if (initialPress != 0) {
+  if (initialPress != 0 && allMadeContact == false) {
     drawWrapperBeam();
   }
 
@@ -78,7 +88,13 @@ function draw() {
     for (let i = electrons.length - 1; i >= 0; i -= 1) {
       electrons[i].x += electrons[i].xVel;
       electrons[i].y += electrons[i].yVel;
-      electrons[i].collisionMathSteppedBlock(0, 0);
+
+      switch(globalShape) {
+        case 'two_blocks': {
+          electrons[i].collisionMathSteppedBlock();
+          break;
+        }
+      }
 
       electrons[i].secondaryDetectorCollision();
 
@@ -89,21 +105,46 @@ function draw() {
       electrons[i].distanceFromDetectorX = abs(electrons[i].x - secondaryDetectorCenterX);
       electrons[i].distanceFromDetectorY = abs(electrons[i].y - secondaryDetectorCenterY);
       electrons[i].distance = sqrt(electrons[i].distanceFromDetectorX * electrons[i].distanceFromDetectorX + electrons[i].distanceFromDetectorY * electrons[i].distanceFromDetectorY);
+    }
 
+    let allMadeContactTemp = true;
+    for (let i = 0; i < electrons.length; i++) {
+      if (electrons[i].hasMadeContact == false) {
+        allMadeContactTemp = false;
+      }
+    }
+    if (allMadeContactTemp) {
+      allMadeContact = true;
+    }
+    let allOutOfFrameTemp = true;
+    for (let i = 0; i < electrons.length; i++) {
+      console.log(i + " " + electrons[i].outOfFrame);
+      if (electrons[i].outOfFrame == false) {
+        allOutOfFrameTemp = false;
+        console.log(i);
+      }
+    }
+    if (allOutOfFrameTemp == true) {
+      //background(100, 100, 100);
+      allOutOfFrame = true;
     }
   }
 
   // console.log("simulation speed: " + simulationSpeed);
 
   fill(255);
+  stroke(1);
   for (let i = 0; i < electrons.length; i++) {
     ellipse(electrons[i].x, electrons[i].y, electrons[i].diameter);
   }
 
   drawObjectiveLens();
-  drawSEMComponents();
+  drawSecondaryDetector();
 
   sample.drawSample();
+
+  //fill(0);
+  //rect(250, 642.5, 72.5, 10);
 }
 
 function playSimulation() {
@@ -116,12 +157,6 @@ function playSimulation() {
 
 function pauseSimulation() {
   isPlaying = false;
-}
-
-function drawSEMComponents() {
-
-  drawSecondaryDetector();
-
 }
 
 function drawObjectiveLens() {

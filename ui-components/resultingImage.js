@@ -3,7 +3,7 @@ const s = (sketch) => {
   var currentRow;
   var currentColumn;
 
-  let imageMatrix;
+  var imageMatrix;
 
   sketch.setup = () => {
     sketch.canvas = sketch.createCanvas(200, 200);
@@ -22,7 +22,7 @@ const s = (sketch) => {
 
     for (let r = 0; r < 5; r++) {
       for (let c = 0; c < 5; c++) {
-        if (r == 0 && c == 0) {
+        if (r == sectionIndex && c == topographyIndex && allOutOfFrame) {
 
           sketch.fill(electronCount);
           // console.log(electronCount);
