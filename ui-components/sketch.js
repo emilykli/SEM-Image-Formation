@@ -32,9 +32,13 @@ var allMadeContact = false;
 
 var allOutOfFrame = false;
 
+var playPause = false;
+
 function setup() {
 
-  isPlaying = false;
+  if (playPause) {
+    isPlaying = false;
+  }
 
   allMadeContact = false;
 
@@ -42,7 +46,9 @@ function setup() {
 
   electronCount = 0;
 
-  initialPress = 0;
+  if(playPause) {
+    initialPress = 0;
+  }
 
   var canvas = createCanvas(canvasWidth, canvasHeight);
   // console.log(windowWidth * 0.55 + " " + windowHeight * 0.80);
@@ -55,7 +61,6 @@ function setup() {
 
   sample = new Sample(globalShape);
 
-  stage = 1;
   beamLeftBound = 270; //each stage is 73 px wide
   beamRightBound = 303;
 
@@ -63,8 +68,8 @@ function setup() {
   electrons = [];
 
   for (let i = 0; i < 25; i++) {
-    let xCoord = canvasCenter + i * 20 * simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) + random(0, 30);
-    let yCoord = -20 - simulationSpeed / 100 * maxElectronVelocity * i * 20;
+    let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) /*+ random(0, 30)*/;
+    let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
     let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
     let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
     let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity);
@@ -89,7 +94,7 @@ function draw() {
       electrons[i].x += electrons[i].xVel;
       electrons[i].y += electrons[i].yVel;
 
-      switch(globalShape) {
+      switch (globalShape) {
         case 'two_blocks': {
           electrons[i].collisionMathSteppedBlock();
           break;
@@ -127,6 +132,39 @@ function draw() {
     if (allOutOfFrameTemp == true) {
       //background(100, 100, 100);
       allOutOfFrame = true;
+
+    }
+
+    if (allOutOfFrame) {
+      if (sectionIndex <= 3) {
+        sectionIndex += 1;
+        allOutOfFrame = false;
+        allMadeContact = false;
+        beamLeftBound += 73;
+        beamRightBound += 73;
+
+        electronCount = 0;
+
+        electrons = [];
+
+        for (let i = 0; i < 25; i++) {
+          let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) /*+ random(0, 30)*/;
+          let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
+          let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
+          let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
+          let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity);
+
+          electrons.push(newElectron);
+        }
+      }
+      else {
+        topographyIndex += 1;
+        sectionIndex = 0;
+        playPause = false;
+        allOutOfFrame = false;
+        allMadeContact = false;
+        setup();
+      }
     }
   }
 

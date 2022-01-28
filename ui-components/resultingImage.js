@@ -22,15 +22,10 @@ const s = (sketch) => {
 
     for (let r = 0; r < 5; r++) {
       for (let c = 0; c < 5; c++) {
-        if (r == sectionIndex && c == topographyIndex && allOutOfFrame) {
-
-          sketch.fill(electronCount);
-          // console.log(electronCount);
+        if(r == sectionIndex && c == topographyIndex) {
+          imageMatrix[r][c] = electronCount;
         }
-
-        else {
-          sketch.fill(0);
-        }
+        sketch.fill(imageMatrix[r][c]);
         sketch.rect(40*r, 40*c, 40, 40);
       }
     }

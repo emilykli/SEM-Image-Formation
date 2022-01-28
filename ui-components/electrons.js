@@ -17,7 +17,7 @@ class Electron {
         fill(100, 100, 100);
         if (topographyIndex == 0 || topographyIndex == 4) {
             //rect(250, 642.5, 72.5, 10);
-            if (collideRectCircle(250, 570 + 145 / 2, 72.5, 10, this.x, this.y, this.diameter)) //collides with left region in 
+            if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
             {
 
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
