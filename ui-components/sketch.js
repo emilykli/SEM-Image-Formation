@@ -53,7 +53,7 @@ function setup() {
   // background(round(random(0, 255)),round(random(0, 255)),round(random(0, 255)));
   background(230);
 
-  sample = new Sample("two_blocks");
+  sample = new Sample(globalShape);
 
   stage = 1;
   beamLeftBound = 270; //each stage is 73 px wide
