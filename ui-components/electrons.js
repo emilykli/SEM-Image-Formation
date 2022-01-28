@@ -33,7 +33,7 @@ class Electron {
             }
         }
         else {
-            if (collideRectCircle(250, 570 + 145 / 2, 72.5, 10, this.x, this.y, this.diameter)) //collides with left region in 
+            if (collideRectCircle(250, 570 + 145 / 2, 72.5, 10, this.x, this.y, this.diameter) || collideRectCircle(323, 560, 112, 10, this.x, this.y, this.diameter) || collideRectCircle(250 + 73 + 109.5, 642.5, 182.5, 10, this.x, this.y, this.diameter)) //collides with flat region  
             {
 
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
@@ -44,8 +44,12 @@ class Electron {
                 this.hasMadeContact = true;
             }
 
-            if (collideRectCircle(250 + 72.5, 550, 1, 72.5, this.x, this.y, this.diameter)) {
+            else if (collideRectCircle(250 + 72.5, 561, 1, 72.5, this.x, this.y, this.diameter) || collideRectCircle(250 + 72.5 + 109.5, 561, 1, 72.5, this.x, this.y, this.diameter)) {
                 this.diameter = 0;
+                this.outOfFrame = true;
+            }
+            if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
+                this.outOfFrame = true;
             }
         }
     }
@@ -66,6 +70,7 @@ class Electron {
         if (collideRectCircle(10, 200, 180, 70, this.x, this.y, this.diameter) && this.collidedWithDetector == false) {
             this.diameter = 0;
             this.collidedWithDetector = true;
+            this.outOfFrame = true;
             electronCount += 8;
         }
     }

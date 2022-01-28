@@ -36,9 +36,7 @@ var playPause = false;
 
 function setup() {
 
-  if (playPause) {
-    isPlaying = false;
-  }
+  isPlaying = false;
 
   allMadeContact = false;
 
@@ -46,9 +44,7 @@ function setup() {
 
   electronCount = 0;
 
-  if(playPause) {
-    initialPress = 0;
-  }
+  initialPress = 0;
 
   var canvas = createCanvas(canvasWidth, canvasHeight);
   // console.log(windowWidth * 0.55 + " " + windowHeight * 0.80);
@@ -68,7 +64,7 @@ function setup() {
   electrons = [];
 
   for (let i = 0; i < 25; i++) {
-    let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) /*+ random(0, 30)*/;
+    let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) + random(-5, 5);
     let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
     let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
     let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
@@ -148,7 +144,7 @@ function draw() {
         electrons = [];
 
         for (let i = 0; i < 25; i++) {
-          let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) /*+ random(0, 30)*/;
+          let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) + random(-5, 5);
           let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
           let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
           let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
@@ -164,6 +160,31 @@ function draw() {
         allOutOfFrame = false;
         allMadeContact = false;
         setup();
+        isPlaying = true;
+        initialPress = 1;
+
+        switch(globalShape) {
+          case 'two_blocks': {
+            document.getElementById("isoImage").src = rectImages[topographyIndex];
+            break;
+          }
+          case 'dome': {
+            document.getElementById("isoImage").src = domeImages[topographyIndex];
+            break;
+          }
+          case 'inverted_pyramid': {
+            document.getElementById("isoImage").src = invertedPyramidImages[topographyIndex];
+            break;
+          }
+          case 'pyramid': {
+            document.getElementById("isoImage").src = pyramidImages[topographyIndex];
+            break;
+          }
+          case 'spire': {
+            document.getElementById("isoImage").src = spireImages[topographyIndex];
+            break;
+          }
+        }
       }
     }
   }
@@ -181,8 +202,12 @@ function draw() {
 
   sample.drawSample();
 
-  //fill(0);
-  //rect(250, 642.5, 72.5, 10);
+  // fill(0);
+  // rect(250, 642.5, 72.5, 10);
+  // rect(250 + 72.5, 550, 1, 72.5);
+  // rect(323, 560, 109.5, 10);
+  // rect(250 + 72.5 + 109.5, 550, 1, 72.5);
+  // rect(250 + 73 + 109.5, 642.5, 182.5, 10);
 }
 
 function playSimulation() {
