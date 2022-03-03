@@ -1,10 +1,11 @@
 class Electron {
-    constructor(xCoordinate, yCoordinate, xVelocity, yVelocity) {
+    constructor(xCoordinate, yCoordinate, xVelocity, yVelocity, i) {
         this.x = xCoordinate;
         this.y = yCoordinate;
         this.diameter = 12;
         this.xVel = xVelocity;
         this.yVel = yVelocity;
+        this.index = i;
         this.hasMadeContact = false;
         this.distanceFromDetectorX = abs(this.x - secondaryDetectorCenterX);
         this.distanceFromDetectorY = abs(this.y - secondaryDetectorCenterY);
@@ -21,7 +22,7 @@ class Electron {
             {
 
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-                let randomAngle = random([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) / 10 * PI;
+                let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
 
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
@@ -37,7 +38,7 @@ class Electron {
             {
 
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-                let randomAngle = random(0, PI);
+                let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
 
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
@@ -55,15 +56,28 @@ class Electron {
     }
 
     electronDriftMath() {
+        var P_detector = 300;
+        var KE = 8.01 * Math.pow(10, -18);
+        var delta_t = 0.001;
+        var q_e = 1.602 * Math.pow(10, -19);
+        var m_e = 9.109 * Math.pow(10, -31);
+        var L = 0.02;
 
-        this.y -= 400 / this.distance;
-        if (this.x < 150) {
-            this.x += 200 / this.distance;
-        }
-        if (this.x > 100) {
-            this.x -= 200 / this.distance;
-        }
-        this.x -= 100 / this.distance
+        var A = P_detector * q_e / KE;
+        var det_x0 = secondaryDetectorCenterX;
+        var det_y0 = secondaryDetectorCenterY;
+        var sigma_x = 2.5;
+        var sigma_y = 2;
+
+        var E_field = electric_field(this.x, this.y, A, det_x0, det_y0, sigma_x, sigma_y);
+
+
+        this.x += delta_t * this.xVel;
+        this.y += delta_t * this.yVel;
+
+        this.xVel += delta_t * E_field[0];
+        this.yVel += delta_t * E_field[1];
+
     }
 
     secondaryDetectorCollision() {
@@ -74,4 +88,54 @@ class Electron {
             electronCount += 8;
         }
     }
+}
+
+function electric_field(x, y, A, det_x0, det_y0, sigma_x, sigma_y) {
+
+    var rx = det_x0 - x;
+    var ry = det_y0 - y;
+
+    //magnitude
+    var ex = rx * rx / (2 * sigma_x * sigma_x);
+    var ey = ry * ry / (2 * sigma_y * sigma_y);
+    var E = A * Math.exp(- (ex + ey));
+
+    //direction
+    var dist = Math.pow(rx * rx + ry * ry, 0.5)
+
+    var Ex = E * rx / dist
+    var Ey = E * ry / dist
+
+    return [Ex, Ey]
+
+
+}
+
+function angle_randomizer(index) {
+    switch(index){
+        case 0:
+            return 5;
+        case 1:
+            return 7;
+        case 2:
+            return 1;
+        case 3:
+            return 9;
+        case 4:
+            return 2;
+        case 5:
+            return 6;
+        case 6:
+            return 4;
+        case 7:
+            return 8;
+        case 8:
+            return 3;
+        case 9:
+            return 0;
+        case 10:
+            return 10;
+        
+    }
+
 }

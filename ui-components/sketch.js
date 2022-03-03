@@ -63,12 +63,12 @@ function setup() {
 
   electrons = [];
 
-  for (let i = 0; i < 25; i++) {
-    let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) + random(-5, 5);
+  for (let i = 0; i < 20; i++) {
+    let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
     let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
     let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
     let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
-    let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity);
+    let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity, i);
 
     electrons.push(newElectron);
   }
@@ -77,8 +77,6 @@ function setup() {
 
 function draw() {
   background(230);
-
-  //console.log(globalShape);
 
   if (initialPress != 0 && allMadeContact == false) {
     drawWrapperBeam();
@@ -143,12 +141,12 @@ function draw() {
 
         electrons = [];
 
-        for (let i = 0; i < 25; i++) {
-          let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight) + random(-5, 5);
+        for (let i = 0; i < 20; i++) {
+          let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
           let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
           let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
           let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
-          let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity);
+          let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity, i);
 
           electrons.push(newElectron);
         }
