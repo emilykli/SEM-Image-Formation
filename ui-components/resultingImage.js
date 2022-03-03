@@ -25,7 +25,7 @@ const s = (sketch) => {
         if(r == sectionIndex && c == topographyIndex) {
           imageMatrix[r][c] = electronCount;
         }
-        sketch.fill(imageMatrix[r][c]);
+        sketch.fill(10 * imageMatrix[r][c]);
         sketch.rect(40*r, 40*c, 40, 40);
       }
     }

@@ -56,18 +56,16 @@ class Electron {
     }
 
     electronDriftMath() {
-        var P_detector = 300;
+        var P_detector = 400;
         var KE = 8.01 * Math.pow(10, -18);
         var delta_t = 0.001;
         var q_e = 1.602 * Math.pow(10, -19);
-        var m_e = 9.109 * Math.pow(10, -31);
-        var L = 0.02;
 
-        var A = P_detector * q_e / KE;
+        var A = P_detector * q_e / KE * 10;
         var det_x0 = secondaryDetectorCenterX;
         var det_y0 = secondaryDetectorCenterY;
-        var sigma_x = 2.5;
-        var sigma_y = 2;
+        var sigma_x = 1050;
+        var sigma_y = 750;
 
         var E_field = electric_field(this.x, this.y, A, det_x0, det_y0, sigma_x, sigma_y);
 
@@ -85,7 +83,7 @@ class Electron {
             this.diameter = 0;
             this.collidedWithDetector = true;
             this.outOfFrame = true;
-            electronCount += 8;
+            electronCount += 1;
         }
     }
 }
