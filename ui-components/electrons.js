@@ -86,12 +86,12 @@ class Electron {
     }
 
     electronDriftMath() {
-        var P_detector = 400;
+        var P_detector = 300;
         var KE = 8.01 * Math.pow(10, -18);
         var delta_t = 0.001;
         var q_e = 1.602 * Math.pow(10, -19);
 
-        var A = P_detector * q_e / KE * 10;
+        var A = P_detector * q_e / KE * 2;
         var det_x0 = secondaryDetectorCenterX;
         var det_y0 = secondaryDetectorCenterY;
         var sigma_x = 1050;
