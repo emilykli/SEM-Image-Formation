@@ -74,8 +74,8 @@ class Sample {
             vertex(0, 146);
             vertex(365, 146);
             vertex(365, 73.5);
-            vertex(182.5, 73.5);
-            vertex(182.5, 0);
+            vertex(219, 73.5);
+            vertex(219, 0);
             vertex(73, 0);
             vertex(73, 73.5);
             vertex(0, 73.5);

@@ -75,7 +75,7 @@
                   }
                 </script>
               </li>
-              <li>
+              <!-- <li>
                 <div class="slidecontainer">
                   <input type="range" min="1" max="100" value="25" class="slider" id="myRange"
                     onclick="sliderValueChanged()">
@@ -85,14 +85,14 @@
                       simulationSpeed = document.getElementById("myRange").value;
 
                       for (let i = 0; i < electrons.length; i++) {
-                        electrons[i].yVel = simulationSpeed / 100 * maxElectronVelocity;
+                        electrons[i].yVel *= simulationSpeed / electrons[i].yVel;
                         electrons[i].xVel = -electrons[i].yVel * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
                       }
                     }
                   </script>
                 </div>
                 <div>Animation Speed</div>
-              </li>
+              </li> -->
             </ul>
 
         </li>

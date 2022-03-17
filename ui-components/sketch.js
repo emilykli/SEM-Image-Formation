@@ -64,9 +64,10 @@ function setup() {
   electrons = [];
 
   for (let i = 0; i < 20; i++) {
-    let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
+    let beamCenter = 1/2 * (beamLeftBound + beamRightBound)
+    let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
     let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
-    let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
+    let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
     let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
     let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity, i);
 
@@ -91,6 +92,10 @@ function draw() {
       switch (globalShape) {
         case 'two_blocks': {
           electrons[i].collisionMathSteppedBlock();
+          break;
+        }
+        case 'dome':{
+          electrons[i].collisionMathDome();
           break;
         }
       }
@@ -142,18 +147,18 @@ function draw() {
         electrons = [];
 
         for (let i = 0; i < 20; i++) {
-          let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
+          let beamCenter = 1/2 * (beamLeftBound + beamRightBound)
+          let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
           let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
-          let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - 73 / 2 + 20 - beamLeftBound) / (623.5 - objectiveLensHeight);
+          let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
           let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
           let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity, i);
-
+      
           electrons.push(newElectron);
         }
       }
       else {
         if(topographyIndex == 4) {
-          console.log("hi")
           swapPlayPause();
         }
         else {
@@ -207,11 +212,16 @@ function draw() {
   sample.drawSample();
 
   // fill(0);
-  // rect(250, 642.5, 72.5, 10);
-  // rect(250 + 72.5, 550, 1, 72.5);
-  // rect(323, 560, 109.5, 10);
-  // rect(250 + 72.5 + 109.5, 550, 1, 72.5);
+  // rect(250, 642.5, 91.25, 10);
+  // rect(250 + 73, 550, 1, 150);
+  // rect(250 + 73, 570, 146, 10);
+  // fill(color('#A020F0'))
+  // rect(250 + 73*3, 550, 1, 150);
+  // fill(0)
   // rect(250 + 73 + 109.5, 642.5, 182.5, 10);
+
+  // fill(0);
+  // ellipse(250 + 182.5, 550 + 73.5, 120);
 }
 
 function playSimulation() {
@@ -248,8 +258,8 @@ function drawWrapperBeam() {
   noStroke();
   fill(30);
   beginShape(TESS);
-  vertex(canvasCenter - 73 / 2 + 20, objectiveLensHeight);
-  vertex(canvasCenter + 73 / 2 - 20, objectiveLensHeight);
+  vertex(canvasCenter - 16.5, 0);
+  vertex(canvasCenter + 16.5, 0);
   vertex(beamRightBound, 623.5);
   vertex(beamLeftBound, 623.5);
   endShape(CLOSE);
