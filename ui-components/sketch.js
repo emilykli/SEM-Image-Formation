@@ -98,6 +98,14 @@ function draw() {
           electrons[i].collisionMathDome();
           break;
         }
+        case 'pyramid': {
+          electrons[i].collisionMathPyramid();
+          break;
+        }
+        case 'inverted_pyramid': {
+          electrons[i].collisionMathInvertedPyramid();
+          break;
+        }
       }
 
       electrons[i].secondaryDetectorCollision();
@@ -203,7 +211,9 @@ function draw() {
   fill(255);
   stroke(1);
   for (let i = 0; i < electrons.length; i++) {
-    ellipse(electrons[i].x, electrons[i].y, electrons[i].diameter);
+    if (electrons[i].diameter != 0) {
+      ellipse(electrons[i].x, electrons[i].y, electrons[i].diameter);
+    }
   }
 
   drawObjectiveLens();
@@ -221,7 +231,7 @@ function draw() {
   // rect(250 + 73 + 109.5, 642.5, 182.5, 10);
 
   // fill(0);
-  // ellipse(250 + 182.5, 550 + 73.5, 120);
+  // ellipse(432.5, 623.5, 250);
 }
 
 function playSimulation() {
@@ -268,9 +278,9 @@ function drawWrapperBeam() {
 
 function drawSecondaryDetector() {
   var translateX = 10;
-  var translateY = 200;
+  var translateY = 20;
 
-  var secondaryDetectorHeight = 70;
+  var secondaryDetectorHeight = 300;
   var secondaryDetectorWidth = 180;
 
   secondaryDetectorCenterX = translateX + secondaryDetectorWidth / 2;

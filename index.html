@@ -71,6 +71,13 @@
                       swapPlayPause();
                     }
                     playPause = true;
+                    featureSelectionButton(globalShape);
+                    electronCount = 0;
+                    currentRow = 0;
+                    currentColumn = 0;
+                    imageMatrix = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
+                    sectionIndex = 0;
+                    topographyIndex = 0;
                     setup();
                   }
                 </script>
@@ -271,7 +278,7 @@
           <ul class="inside-box">
             <li>
               <button onclick="changeIsometricImage(-1)"><</button>
-              <button onclick="changeIsometricImage(1)">></button>
+                  <button onclick="changeIsometricImage(1)">></button>
 
                   <script>
 
@@ -290,7 +297,7 @@
                         topographyIndex = 0;
                       }
 
-                      switch(globalShape) {
+                      switch (globalShape) {
                         case 'two_blocks': {
                           document.getElementById("isoImage").src = rectImages[topographyIndex];
                           break;
