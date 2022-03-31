@@ -33,6 +33,7 @@ const s = (sketch) => {
       for (let c = 0; c < 5; c++) {
         if (r == sectionIndex && c == topographyIndex) {
           imageMatrix[r][c] = electronCount;
+          // console.log(r + ", " + c + " : " + electronCount)
         }
         sketch.fill(10 * imageMatrix[r][c]);
         sketch.rect(40 * r, 40 * c, 40, 40);

@@ -18,13 +18,23 @@ class Electron {
         if (topographyIndex == 0 || topographyIndex == 4) {
             if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
             {
+                if (this.hasMadeContact) {
+                    this.diameter = 0;
+                    this.outOfFrame = true;
+                }
 
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
                 let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
 
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
             }
 
             if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
@@ -41,10 +51,19 @@ class Electron {
 
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+
+                if(this.diameter != 0 && randomAngle != PI && randomAngle != 0) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                
             }
 
-            else if (collideRectCircle(250 + 73, 550, 1, 150, this.x, this.y, this.diameter) || collideRectCircle(250 + 73*3, 550, 1, 150, this.x, this.y, this.diameter)) {
+            else if (collideRectCircle(250 + 73, 550, 1, 150, this.x, this.y, this.diameter) || collideRectCircle(250 + 73 * 3, 550, 1, 150, this.x, this.y, this.diameter)) {
                 this.diameter = 0;
                 this.outOfFrame = true;
             }
@@ -58,79 +77,111 @@ class Electron {
     collisionMathDome() {
         let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
         let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+        if (randomAngle == 0) {
+            randomAngle += 0.1;
+        }
+        if (randomAngle == PI) {
+            randomAngle -= 0.1;
+        }
 
         if (topographyIndex == 0) {
-            if(collideCircleCircle(250 + 182.5, 550 + 73.5, 120, this.x, this.y, this.diameter)) {
-                if (this.hasMadeContact && sectionIndex != 2){
+            if (collideCircleCircle(250 + 182.5, 550 + 73.5, 120, this.x, this.y, this.diameter)) {
+                if (this.hasMadeContact && sectionIndex != 2) {
                     this.diameter = 0;
                     this.outOfFrame = true;
                 }
-                let circleSlope = -(this.x - 432.5)/(this.y - 623.5);
-                let circleAngle = atan(circleSlope);
-                console.log("circleAngle: " + circleAngle)
-                this.xVel = totalVelocity * cos(randomAngle + circleAngle);
-                this.yVel = -totalVelocity * sin(randomAngle + circleAngle);
+                let circleSlope = (this.y - 623.5) / (this.x - 432.5);
+                let circleAngle = atan(-1 / circleSlope);
+                this.xVel = -totalVelocity * cos(circleAngle + randomAngle);
+                this.yVel = -totalVelocity * sin(circleAngle + randomAngle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
             }
         }
 
         if (topographyIndex == 1) {
-            if(collideCircleCircle(250 + 182.5, 550 + 73.5, 250, this.x, this.y, this.diameter)) {
-                if (this.hasMadeContact && sectionIndex != 2){
+            if (collideCircleCircle(250 + 182.5, 550 + 73.5, 245, this.x, this.y, this.diameter)) {
+                if (this.hasMadeContact && sectionIndex != 2) {
                     this.diameter = 0;
                     this.outOfFrame = true;
                 }
-                let circleSlope = -(this.x - 432.5)/(this.y - 623.5);
-                let circleAngle = atan(circleSlope);
-                console.log("circleAngle: " + circleAngle)
-                this.xVel = totalVelocity * cos(randomAngle + circleAngle);
-                this.yVel = -totalVelocity * sin(randomAngle + circleAngle);
+                let circleSlope = (this.y - 623.5) / (this.x - 432.5);
+                let circleAngle = atan(-1 / circleSlope);
+                this.xVel = -totalVelocity * cos(circleAngle + randomAngle);
+                this.yVel = -totalVelocity * sin(circleAngle + randomAngle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
             }
         }
 
         if (topographyIndex == 2) {
-            if(collideCircleCircle(250 + 182.5, 550 + 73.5, 270, this.x, this.y, this.diameter)) {
-                if (this.hasMadeContact && sectionIndex != 2){
+            if (collideCircleCircle(250 + 182.5, 550 + 73.5, 265, this.x, this.y, this.diameter)) {
+                if (this.hasMadeContact && sectionIndex != 2) {
                     this.diameter = 0;
                     this.outOfFrame = true;
                 }
-                let circleSlope = -(this.x - 432.5)/(this.y - 623.5);
-                let circleAngle = atan(circleSlope);
-                console.log("circleAngle: " + circleAngle)
-                this.xVel = totalVelocity * cos(randomAngle + circleAngle);
-                this.yVel = -totalVelocity * sin(randomAngle + circleAngle);
+                let circleSlope = (this.y - 623.5) / (this.x - 432.5);
+                let circleAngle = atan(-1 / circleSlope);
+                this.xVel = -totalVelocity * cos(circleAngle + randomAngle);
+                this.yVel = -totalVelocity * sin(circleAngle + randomAngle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
             }
         }
 
         if (topographyIndex == 3) {
-            if(collideCircleCircle(250 + 182.5, 550 + 73.5, 210, this.x, this.y, this.diameter)) {
-                if (this.hasMadeContact && sectionIndex != 2){
+            if (collideCircleCircle(250 + 182.5, 550 + 73.5, 205, this.x, this.y, this.diameter)) {
+                if (this.hasMadeContact && sectionIndex != 2) {
                     this.diameter = 0;
                     this.outOfFrame = true;
                 }
-                let circleSlope = -(this.x - 432.5)/(this.y - 623.5);
-                let circleAngle = atan(circleSlope);
-                this.xVel = totalVelocity * cos(randomAngle + circleAngle);
-                this.yVel = -totalVelocity * sin(randomAngle + circleAngle);
+                let circleSlope = (this.y - 623.5) / (this.x - 432.5);
+                let circleAngle = atan(-1 / circleSlope);
+                this.xVel = -totalVelocity * cos(circleAngle + randomAngle);
+                this.yVel = -totalVelocity * sin(circleAngle + randomAngle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
             }
         }
 
 
 
         if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
-            {
-                this.xVel = totalVelocity * cos(randomAngle);
-                this.yVel = -totalVelocity * sin(randomAngle);
-                this.hasMadeContact = true;
+        {
+            if (this.hasMadeContact) {
+                this.diameter = 0;
+                this.outOfFrame = true;
             }
 
-            if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
-                this.outOfFrame = true;
-                this.diameter = 0;
-            }
+            this.xVel = totalVelocity * cos(randomAngle);
+            this.yVel = -totalVelocity * sin(randomAngle);
+            this.x += this.xVel * 2;
+            this.y += this.yVel * 2;
+            this.hasMadeContact = true;
+        }
+
+        if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
+            this.outOfFrame = true;
+            this.diameter = 0;
+        }
     }
 
     collisionMathPyramid() {
@@ -143,7 +194,7 @@ class Electron {
 
         let leftVertexX, leftVertexY, rightVertexX, rightVertexY;
 
-        switch(topographyIndex){
+        switch (topographyIndex) {
             case 1: {
                 leftVertexX = 128.5 + 250;
                 leftVertexY = 73.5 - 46 + 550;
@@ -169,20 +220,24 @@ class Electron {
             }
         }
 
-        if (topographyIndex == 1 || topographyIndex == 2 || topographyIndex == 3) 
-        {
+        if (topographyIndex == 1 || topographyIndex == 2 || topographyIndex == 3) {
             leftVertexY += 20;
             rightVertexY += 20;
 
             //top surface
-            if(collideLineCircle(leftVertexX, leftVertexY, rightVertexX, rightVertexY, this.x, this.y, this.diameter)) {
+            if (collideLineCircle(leftVertexX, leftVertexY, rightVertexX, rightVertexY, this.x, this.y, this.diameter)) {
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
             }
 
             //side surface
-            if(collideLineCircle(leftVertexX, leftVertexY, bottomLeftX, bottomY, this.x, this.y, this.diameter)) {
+            if (collideLineCircle(leftVertexX, leftVertexY, bottomLeftX, bottomY, this.x, this.y, this.diameter)) {
                 if (this.hasMadeContact && sectionIndex != 1 && sectionIndex != 3) {
                     this.diameter = 0;
                     this.hasMadeContact = true;
@@ -194,11 +249,17 @@ class Electron {
 
                 this.xVel = totalVelocity * cos(randomAngle + angle);
                 this.yVel = -totalVelocity * sin(randomAngle + angle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
 
             }
 
-            if(collideLineCircle(bottomRightX, bottomY, rightVertexX, rightVertexY, this.x, this.y, this.diameter)) {
+            if (collideLineCircle(bottomRightX, bottomY, rightVertexX, rightVertexY, this.x, this.y, this.diameter)) {
                 if (this.hasMadeContact && sectionIndex != 1 && sectionIndex != 3) {
                     this.diameter = 0;
                     this.hasMadeContact = true;
@@ -210,14 +271,24 @@ class Electron {
 
                 this.xVel = totalVelocity * cos(randomAngle + angle);
                 this.yVel = -totalVelocity * sin(randomAngle + angle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
             }
         }
 
         if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
         {
+            if (this.hasMadeContact) {
+                this.diameter = 0;
+                this.outOfFrame = true;
+            }
 
-            if(sectionIndex == 1 || sectionIndex == 3){
+            if (sectionIndex == 1 || sectionIndex == 3) {
                 this.diameter = 0;
                 this.outOfFrame = true;
             }
@@ -226,7 +297,13 @@ class Electron {
 
             this.xVel = totalVelocity * cos(randomAngle);
             this.yVel = -totalVelocity * sin(randomAngle);
+            this.x += this.xVel * 2;
+            this.y += this.yVel * 2;
             this.hasMadeContact = true;
+
+            interactionVol = true;
+            interactionVolX = this.x;
+            interactionVolY = this.y;
         }
 
         if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
@@ -241,16 +318,25 @@ class Electron {
 
         if (topographyIndex == 1 || topographyIndex == 2 || topographyIndex == 3) {
             //top surface
-            if(collideLineCircle(323, 533, 542, 533, this.x, this.y, this.diameter))
-            {
+            if (collideLineCircle(323, 533, 542, 533, this.x, this.y, this.diameter)) {
+                if (randomAngle == 0 || randomAngle == PI) {
+                    this.diameter = 0;
+                    this.hasMadeContact = true;
+                    this.outOfFrame = true;
+                }
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
                 this.hasMadeContact = true;
+
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
             }
 
             //side bits
-            if(collideLineCircle(323, 513, 432.5, 623.5, this.x, this.y ,this.diameter) || collideLineCircle(542, 513, 432.5, 623.5, this.x, this.y, this.diameter))
-            {
+            if (collideLineCircle(323, 513, 432.5, 623.5, this.x, this.y, this.diameter) || collideLineCircle(542, 513, 432.5, 623.5, this.x, this.y, this.diameter)) {
                 this.diameter = 0;
                 this.hasMadeContact = true;
                 this.outOfFrame = true;
@@ -259,13 +345,28 @@ class Electron {
 
         if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
         {
+            if (this.hasMadeContact) {
+                this.diameter = 0;
+                this.outOfFrame = true;
+            }
 
             let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
             let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
 
+            if (randomAngle == 0 || randomAngle == PI) {
+                this.hasMadeContact = true;
+                this.outOfFrame = true;
+            }
+
             this.xVel = totalVelocity * cos(randomAngle);
             this.yVel = -totalVelocity * sin(randomAngle);
+            this.x += this.xVel * 2;
+            this.y += this.yVel * 2;
             this.hasMadeContact = true;
+
+            interactionVol = true;
+            interactionVolX = this.x;
+            interactionVolY = this.y;
         }
 
         if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
@@ -274,8 +375,493 @@ class Electron {
         }
     }
 
+    collisionMathSpire() {
+        let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
+        let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+        let slope, angle;
+
+        switch (topographyIndex) {
+            case 0:
+                if (collideLineCircle(250, 623.5 + 20, 323, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+
+                    slope = 0;
+                    angle = atan(slope);
+
+
+                    this.xVel = totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+
+                if (collideLineCircle(323, 623.5 + 20, 396, 622 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (622 - 623.5) / (396 - 323);
+                    angle = atan(slope);
+
+                    this.xVel = totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(396, 622 + 20, 469, 622 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(469, 622 + 20, 542, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (622 - 623.5) / (469 - 542);
+                    angle = atan(slope);
+
+                    this.xVel = totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(542, 623.5 + 20, 615, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                break;
+
+            case 1:
+                if (collideLineCircle(250, 623.5 + 20, 323, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(323, 623.5 + 20, 396, 605 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (605 - 623.5) / (396 - 323);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(377, 610 + 20, 420.3, 595 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (595 - 610) / (420.3 - 377);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(420.3, 593 + 20, 444.6, 593 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(444.6, 595 + 20, 488, 610 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (610 - 595) / (488 - 444.6);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(469, 605 + 20, 542, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (605 - 623.5) / (469 - 542);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(542, 623.5 + 20, 615, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                break;
+
+            case 2:
+                if (collideLineCircle(250, 623.5 + 20, 323, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(323, 623.5 + 20, 396, 590 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (590 - 623.5) / (396 - 323);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(377, 595 + 20, 420.3, 555 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (555 - 595) / (420.3 - 377);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(420.3, 553 + 20, 444.6, 553 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(444.6, 555 + 20, 488, 595 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (595 - 555) / (488 - 444.6);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(469, 590 + 20, 542, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (590 - 623.5) / (469 - 542);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(542, 623.5 + 20, 615, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                break;
+
+            case 3:
+                if (collideLineCircle(250, 623.5 + 20, 323, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(323, 623.5 + 20, 396, 617 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (617 - 623.5) / (396 - 323);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(396, 616 + 20, 469, 616 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(469, 617 + 20, 542, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = (617 - 623.5) / (469 - 542);
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                if (collideLineCircle(542, 623.5 + 20, 615, 623.5 + 20, this.x, this.y, this.diameter)) {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+                    slope = 0;
+                    angle = atan(slope);
+
+                    this.xVel = -totalVelocity * cos(randomAngle + angle);
+                    this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                break;
+
+            case 4:
+                if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
+                {
+                    if (this.hasMadeContact) {
+                        this.diameter = 0;
+                        this.outOfFrame = true;
+                    }
+
+                    let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
+                    let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+
+                    this.xVel = totalVelocity * cos(randomAngle);
+                    this.yVel = -totalVelocity * sin(randomAngle);
+                    this.x += this.xVel * 2;
+                    this.y += this.yVel * 2;
+                    this.hasMadeContact = true;
+
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+                break;
+
+        }
+
+        if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
+            this.outOfFrame = true;
+            this.diameter = 0;
+        }
+
+    }
+
     electronDriftMath() {
-        var P_detector = 300;
+        var P_detector = 400;
         var KE = 8.01 * Math.pow(10, -18);
         var delta_t = 0.001;
         var q_e = 1.602 * Math.pow(10, -19);
@@ -298,7 +884,7 @@ class Electron {
     }
 
     secondaryDetectorCollision() {
-        if (collideRectCircle(10, 20, 180, 300, this.x, this.y, this.diameter) && this.collidedWithDetector == false) {
+        if (collideRectCircle(0, 0, 180, 300, this.x, this.y, this.diameter) && this.collidedWithDetector == false && this.diameter != 0 && !this.outofFrame) {
             this.diameter = 0;
             this.collidedWithDetector = true;
             this.outOfFrame = true;
@@ -329,7 +915,7 @@ function electric_field(x, y, A, det_x0, det_y0, sigma_x, sigma_y) {
 }
 
 function angle_randomizer(index) {
-    switch(index){
+    switch (index) {
         case 0:
             return 5;
         case 1:
@@ -352,7 +938,7 @@ function angle_randomizer(index) {
             return 0;
         case 10:
             return 10;
-        
+
     }
 
 }

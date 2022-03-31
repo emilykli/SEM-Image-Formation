@@ -34,7 +34,13 @@ var allOutOfFrame = false;
 
 var playPause = false;
 
+var interactionVol = false;
+
+var interactionVolX, interactionVolY;
+
 function setup() {
+
+  interactionVol = false;
 
   isPlaying = false;
 
@@ -106,6 +112,10 @@ function draw() {
           electrons[i].collisionMathInvertedPyramid();
           break;
         }
+        case 'spire': {
+          electrons[i].collisionMathSpire();
+          break;
+        }
       }
 
       electrons[i].secondaryDetectorCollision();
@@ -147,6 +157,7 @@ function draw() {
         sectionIndex += 1;
         allOutOfFrame = false;
         allMadeContact = false;
+        interactionVol = false;
         beamLeftBound += 73;
         beamRightBound += 73;
 
@@ -232,6 +243,10 @@ function draw() {
 
   // fill(0);
   // ellipse(432.5, 623.5, 250);
+
+  if(interactionVol && !allMadeContact) {
+    drawInteractionVolume();
+  }
 }
 
 function playSimulation() {
@@ -277,8 +292,8 @@ function drawWrapperBeam() {
 }
 
 function drawSecondaryDetector() {
-  var translateX = 10;
-  var translateY = 20;
+  var translateX = 0;
+  var translateY = 0;
 
   var secondaryDetectorHeight = 300;
   var secondaryDetectorWidth = 180;
@@ -296,4 +311,11 @@ function drawSecondaryDetector() {
   text("Secondary Detector", secondaryDetectorWidth / 2, secondaryDetectorHeight / 2 + 3);
   stroke(1);
   translate(-translateX, -translateY);
+}
+
+function drawInteractionVolume() {
+  noStroke();
+  fill(255, 255, 255, 100);
+  circle(interactionVolX, interactionVolY, 30);
+  stroke(1);
 }
