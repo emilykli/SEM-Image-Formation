@@ -28,13 +28,16 @@ class Electron {
 
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
+                if (!interactionVol) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
 
-                interactionVol = true;
-                interactionVolX = this.x;
-                interactionVolY = this.y;
+
             }
 
             if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
@@ -51,15 +54,16 @@ class Electron {
 
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
-                this.x += this.xVel * 2;
-                this.y += this.yVel * 2;
-                this.hasMadeContact = true;
-
-                if(this.diameter != 0 && randomAngle != PI && randomAngle != 0) {
+                if (!interactionVol) {
                     interactionVol = true;
                     interactionVolX = this.x;
                     interactionVolY = this.y;
                 }
+
+                this.x += this.xVel * 2;
+                this.y += this.yVel * 2;
+                this.hasMadeContact = true;
+
                 
             }
 
@@ -94,12 +98,17 @@ class Electron {
                 let circleAngle = atan(-1 / circleSlope);
                 this.xVel = -totalVelocity * cos(circleAngle + randomAngle);
                 this.yVel = -totalVelocity * sin(circleAngle + randomAngle);
+
+                if (!interactionVol) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
-                interactionVol = true;
-                interactionVolX = this.x;
-                interactionVolY = this.y;
+
             }
         }
 
@@ -113,12 +122,17 @@ class Electron {
                 let circleAngle = atan(-1 / circleSlope);
                 this.xVel = -totalVelocity * cos(circleAngle + randomAngle);
                 this.yVel = -totalVelocity * sin(circleAngle + randomAngle);
+
+                if (!interactionVol) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
-                interactionVol = true;
-                interactionVolX = this.x;
-                interactionVolY = this.y;
+
             }
         }
 
@@ -132,13 +146,18 @@ class Electron {
                 let circleAngle = atan(-1 / circleSlope);
                 this.xVel = -totalVelocity * cos(circleAngle + randomAngle);
                 this.yVel = -totalVelocity * sin(circleAngle + randomAngle);
+
+                if (!interactionVol) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
+
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
 
-                interactionVol = true;
-                interactionVolX = this.x;
-                interactionVolY = this.y;
+                
             }
         }
 
@@ -152,13 +171,16 @@ class Electron {
                 let circleAngle = atan(-1 / circleSlope);
                 this.xVel = -totalVelocity * cos(circleAngle + randomAngle);
                 this.yVel = -totalVelocity * sin(circleAngle + randomAngle);
+                if (!interactionVol) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
 
-                interactionVol = true;
-                interactionVolX = this.x;
-                interactionVolY = this.y;
+                
             }
         }
 
@@ -228,12 +250,14 @@ class Electron {
             if (collideLineCircle(leftVertexX, leftVertexY, rightVertexX, rightVertexY, this.x, this.y, this.diameter)) {
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
+                if (!interactionVol) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
-                interactionVol = true;
-                interactionVolX = this.x;
-                interactionVolY = this.y;
             }
 
             //side surface
@@ -249,13 +273,15 @@ class Electron {
 
                 this.xVel = totalVelocity * cos(randomAngle + angle);
                 this.yVel = -totalVelocity * sin(randomAngle + angle);
+                if (!interactionVol) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
 
-                interactionVol = true;
-                interactionVolX = this.x;
-                interactionVolY = this.y;
 
             }
 
@@ -271,13 +297,14 @@ class Electron {
 
                 this.xVel = totalVelocity * cos(randomAngle + angle);
                 this.yVel = -totalVelocity * sin(randomAngle + angle);
+                if (!interactionVol) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
-
-                interactionVol = true;
-                interactionVolX = this.x;
-                interactionVolY = this.y;
             }
         }
 
@@ -297,13 +324,14 @@ class Electron {
 
             this.xVel = totalVelocity * cos(randomAngle);
             this.yVel = -totalVelocity * sin(randomAngle);
+            if (!interactionVol) {
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
+            }
             this.x += this.xVel * 2;
             this.y += this.yVel * 2;
             this.hasMadeContact = true;
-
-            interactionVol = true;
-            interactionVolX = this.x;
-            interactionVolY = this.y;
         }
 
         if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
@@ -326,13 +354,15 @@ class Electron {
                 }
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
+                if (!interactionVol) {
+                    interactionVol = true;
+                    interactionVolX = this.x;
+                    interactionVolY = this.y;
+                }
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
-
-                interactionVol = true;
-                interactionVolX = this.x;
-                interactionVolY = this.y;
+                
             }
 
             //side bits
@@ -360,13 +390,14 @@ class Electron {
 
             this.xVel = totalVelocity * cos(randomAngle);
             this.yVel = -totalVelocity * sin(randomAngle);
+            if (!interactionVol) {
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
+            }
             this.x += this.xVel * 2;
             this.y += this.yVel * 2;
             this.hasMadeContact = true;
-
-            interactionVol = true;
-            interactionVolX = this.x;
-            interactionVolY = this.y;
         }
 
         if (this.hasMadeContact && (this.x < 0 || this.y < 0 || this.x > canvasWidth || this.y > canvasHeight)) {
@@ -394,13 +425,14 @@ class Electron {
 
                     this.xVel = totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
 
                 if (collideLineCircle(323, 623.5 + 20, 396, 622 + 20, this.x, this.y, this.diameter)) {
@@ -413,13 +445,14 @@ class Electron {
 
                     this.xVel = totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(396, 622 + 20, 469, 622 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -431,13 +464,15 @@ class Electron {
 
                     this.xVel = totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(469, 622 + 20, 542, 623.5 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -449,13 +484,15 @@ class Electron {
 
                     this.xVel = totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(542, 623.5 + 20, 615, 623.5 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -467,13 +504,14 @@ class Electron {
 
                     this.xVel = totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 break;
 
@@ -488,13 +526,14 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(323, 623.5 + 20, 396, 605 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -506,13 +545,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(377, 610 + 20, 420.3, 595 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -524,13 +565,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(420.3, 593 + 20, 444.6, 593 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -542,13 +585,14 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(444.6, 595 + 20, 488, 610 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -560,13 +604,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(469, 605 + 20, 542, 623.5 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -578,13 +624,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(542, 623.5 + 20, 615, 623.5 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -596,13 +644,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 break;
 
@@ -617,13 +667,14 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(323, 623.5 + 20, 396, 590 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -635,13 +686,14 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(377, 595 + 20, 420.3, 555 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -653,13 +705,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(420.3, 553 + 20, 444.6, 553 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -671,13 +725,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(444.6, 555 + 20, 488, 595 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -689,13 +745,14 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(469, 590 + 20, 542, 623.5 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -707,13 +764,14 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(542, 623.5 + 20, 615, 623.5 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -725,13 +783,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 break;
 
@@ -746,13 +806,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(323, 623.5 + 20, 396, 617 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -764,13 +826,15 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(396, 616 + 20, 469, 616 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -782,13 +846,14 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(469, 617 + 20, 542, 623.5 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -800,13 +865,14 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 if (collideLineCircle(542, 623.5 + 20, 615, 623.5 + 20, this.x, this.y, this.diameter)) {
                     if (this.hasMadeContact) {
@@ -818,13 +884,14 @@ class Electron {
 
                     this.xVel = -totalVelocity * cos(randomAngle + angle);
                     this.yVel = -totalVelocity * sin(randomAngle + angle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
-
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 break;
 
@@ -841,13 +908,15 @@ class Electron {
 
                     this.xVel = totalVelocity * cos(randomAngle);
                     this.yVel = -totalVelocity * sin(randomAngle);
+                    if (!interactionVol) {
+                        interactionVol = true;
+                        interactionVolX = this.x;
+                        interactionVolY = this.y;
+                    }
                     this.x += this.xVel * 2;
                     this.y += this.yVel * 2;
                     this.hasMadeContact = true;
 
-                    interactionVol = true;
-                    interactionVolX = this.x;
-                    interactionVolY = this.y;
                 }
                 break;
 

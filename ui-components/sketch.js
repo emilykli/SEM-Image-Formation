@@ -70,7 +70,7 @@ function setup() {
   electrons = [];
 
   for (let i = 0; i < 20; i++) {
-    let beamCenter = 1/2 * (beamLeftBound + beamRightBound)
+    let beamCenter = 1 / 2 * (beamLeftBound + beamRightBound)
     let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
     let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
     let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
@@ -100,7 +100,7 @@ function draw() {
           electrons[i].collisionMathSteppedBlock();
           break;
         }
-        case 'dome':{
+        case 'dome': {
           electrons[i].collisionMathDome();
           break;
         }
@@ -166,53 +166,53 @@ function draw() {
         electrons = [];
 
         for (let i = 0; i < 20; i++) {
-          let beamCenter = 1/2 * (beamLeftBound + beamRightBound)
+          let beamCenter = 1 / 2 * (beamLeftBound + beamRightBound)
           let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
           let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
           let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
           let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
           let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity, i);
-      
+
           electrons.push(newElectron);
         }
       }
       else {
-        if(topographyIndex == 4) {
+        if (topographyIndex == 4) {
           swapPlayPause();
         }
         else {
-        topographyIndex += 1;
-        sectionIndex = 0;
-        playPause = false;
-        allOutOfFrame = false;
-        allMadeContact = false;
-        setup();
-        isPlaying = true;
-        initialPress = 1;
+          topographyIndex += 1;
+          sectionIndex = 0;
+          playPause = false;
+          allOutOfFrame = false;
+          allMadeContact = false;
+          setup();
+          isPlaying = true;
+          initialPress = 1;
 
-        switch(globalShape) {
-          case 'two_blocks': {
-            document.getElementById("isoImage").src = rectImages[topographyIndex];
-            break;
-          }
-          case 'dome': {
-            document.getElementById("isoImage").src = domeImages[topographyIndex];
-            break;
-          }
-          case 'inverted_pyramid': {
-            document.getElementById("isoImage").src = invertedPyramidImages[topographyIndex];
-            break;
-          }
-          case 'pyramid': {
-            document.getElementById("isoImage").src = pyramidImages[topographyIndex];
-            break;
-          }
-          case 'spire': {
-            document.getElementById("isoImage").src = spireImages[topographyIndex];
-            break;
+          switch (globalShape) {
+            case 'two_blocks': {
+              document.getElementById("isoImage").src = rectImages[topographyIndex];
+              break;
+            }
+            case 'dome': {
+              document.getElementById("isoImage").src = domeImages[topographyIndex];
+              break;
+            }
+            case 'inverted_pyramid': {
+              document.getElementById("isoImage").src = invertedPyramidImages[topographyIndex];
+              break;
+            }
+            case 'pyramid': {
+              document.getElementById("isoImage").src = pyramidImages[topographyIndex];
+              break;
+            }
+            case 'spire': {
+              document.getElementById("isoImage").src = spireImages[topographyIndex];
+              break;
+            }
           }
         }
-      }
       }
     }
   }
@@ -244,7 +244,7 @@ function draw() {
   // fill(0);
   // ellipse(432.5, 623.5, 250);
 
-  if(interactionVol && !allMadeContact) {
+  if (interactionVol && !allMadeContact) {
     drawInteractionVolume();
   }
 }
@@ -282,12 +282,22 @@ function drawObjectiveLens() {
 function drawWrapperBeam() {
   noStroke();
   fill(30);
-  beginShape(TESS);
-  vertex(canvasCenter - 16.5, 0);
-  vertex(canvasCenter + 16.5, 0);
-  vertex(beamRightBound, 623.5);
-  vertex(beamLeftBound, 623.5);
-  endShape(CLOSE);
+  if (globalShape == 'inverted_pyramid' && topographyIndex >= 1 && topographyIndex <= 3 && sectionIndex >= 1 && sectionIndex <= 3) {
+    beginShape(TESS);
+    vertex(canvasCenter - 16.5, 0);
+    vertex(canvasCenter + 16.5, 0);
+    vertex(beamRightBound, 513);
+    vertex(beamLeftBound, 513);
+    endShape(CLOSE);
+  }
+  else {
+    beginShape(TESS);
+    vertex(canvasCenter - 16.5, 0);
+    vertex(canvasCenter + 16.5, 0);
+    vertex(beamRightBound, 623.5);
+    vertex(beamLeftBound, 623.5);
+    endShape(CLOSE);
+  }
   stroke(1);
 }
 
