@@ -35,7 +35,7 @@ const s = (sketch) => {
           imageMatrix[r][c] = electronCount;
           // console.log(r + ", " + c + " : " + electronCount)
         }
-        sketch.fill(10 * imageMatrix[r][c]);
+        sketch.fill(3 * imageMatrix[r][c]);
         sketch.rect(40 * r, 40 * c, 40, 40);
       }
     }

@@ -69,12 +69,12 @@ function setup() {
 
   electrons = [];
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 55; i++) {
     let beamCenter = 1 / 2 * (beamLeftBound + beamRightBound)
     let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
     let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
-    let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
-    let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
+    let xVelocity = -35 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
+    let yVelocity = 35 / 100 * maxElectronVelocity;
     let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity, i);
 
     electrons.push(newElectron);
@@ -84,6 +84,7 @@ function setup() {
 
 function draw() {
   background(230);
+  frameRate(simulationSpeed/100 * 60);
 
   if (initialPress != 0 && allMadeContact == false) {
     drawWrapperBeam();
@@ -165,12 +166,12 @@ function draw() {
 
         electrons = [];
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 55; i++) {
           let beamCenter = 1 / 2 * (beamLeftBound + beamRightBound)
           let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
           let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
-          let xVelocity = -simulationSpeed / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
-          let yVelocity = simulationSpeed / 100 * maxElectronVelocity;
+          let xVelocity = -35 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
+          let yVelocity = 35 / 100 * maxElectronVelocity;
           let newElectron = new Electron(xCoord, yCoord, xVelocity, yVelocity, i);
 
           electrons.push(newElectron);
@@ -217,7 +218,6 @@ function draw() {
     }
   }
 
-  // console.log("simulation speed: " + simulationSpeed);
 
   fill(255);
   stroke(1);
@@ -282,21 +282,17 @@ function drawObjectiveLens() {
 function drawWrapperBeam() {
   noStroke();
   fill(30);
+
+  beginShape(TESS);
+  vertex(canvasCenter - 16.5, 0);
+  vertex(canvasCenter + 16.5, 0);
+  vertex(beamRightBound, 623.5);
+  vertex(beamLeftBound, 623.5);
+  endShape(CLOSE);
+
   if (globalShape == 'inverted_pyramid' && topographyIndex >= 1 && topographyIndex <= 3 && sectionIndex >= 1 && sectionIndex <= 3) {
-    beginShape(TESS);
-    vertex(canvasCenter - 16.5, 0);
-    vertex(canvasCenter + 16.5, 0);
-    vertex(beamRightBound, 513);
-    vertex(beamLeftBound, 513);
-    endShape(CLOSE);
-  }
-  else {
-    beginShape(TESS);
-    vertex(canvasCenter - 16.5, 0);
-    vertex(canvasCenter + 16.5, 0);
-    vertex(beamRightBound, 623.5);
-    vertex(beamLeftBound, 623.5);
-    endShape(CLOSE);
+    fill(230);
+    rect(0, 513, 1000, 150)
   }
   stroke(1);
 }
@@ -325,7 +321,7 @@ function drawSecondaryDetector() {
 
 function drawInteractionVolume() {
   noStroke();
-  fill(255, 255, 255, 100);
+  fill(30, 30, 30, 100);
   circle(interactionVolX, interactionVolY, 30);
   stroke(1);
 }

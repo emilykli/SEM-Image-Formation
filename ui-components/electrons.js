@@ -26,6 +26,12 @@ class Electron {
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
                 let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
 
+                if (randomAngle == 0 || randomAngle == PI) {
+                    this.diameter = 0;
+                    this.outOfFrame = true;
+                    this.hasMadeContact = true;
+                }
+
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
                 if (!interactionVol) {
@@ -51,6 +57,12 @@ class Electron {
 
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
                 let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+
+                if (randomAngle == 0 || randomAngle == PI) {
+                    this.diameter = 0;
+                    this.outOfFrame = true;
+                    this.hasMadeContact = true;
+                }
 
                 this.xVel = totalVelocity * cos(randomAngle);
                 this.yVel = -totalVelocity * sin(randomAngle);
@@ -186,7 +198,7 @@ class Electron {
 
 
 
-        if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
+        if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter))
         {
             if (this.hasMadeContact) {
                 this.diameter = 0;
@@ -195,6 +207,13 @@ class Electron {
 
             this.xVel = totalVelocity * cos(randomAngle);
             this.yVel = -totalVelocity * sin(randomAngle);
+
+            if (!interactionVol) {
+                interactionVol = true;
+                interactionVolX = this.x;
+                interactionVolY = this.y;
+            }
+
             this.x += this.xVel * 2;
             this.y += this.yVel * 2;
             this.hasMadeContact = true;
@@ -315,7 +334,7 @@ class Electron {
                 this.outOfFrame = true;
             }
 
-            if (sectionIndex == 1 || sectionIndex == 3) {
+            if ((topographyIndex != 0 && topographyIndex != 4) && (sectionIndex == 1 || sectionIndex == 3)) {
                 this.diameter = 0;
                 this.outOfFrame = true;
             }
@@ -343,6 +362,12 @@ class Electron {
     collisionMathInvertedPyramid() {
         let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
         let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+        if (randomAngle == 0) {
+            randomAngle += 0.1;
+        }
+        if (randomAngle == PI) {
+            randomAngle -= 0.1;
+        }
 
         if (topographyIndex == 1 || topographyIndex == 2 || topographyIndex == 3) {
             //top surface
@@ -935,9 +960,11 @@ class Electron {
         var delta_t = 0.001;
         var q_e = 1.602 * Math.pow(10, -19);
 
-        var A = P_detector * q_e / KE * 2;
+        var A = P_detector * q_e / KE * 5;
+        console.log(secondaryDetectorCenterX);
+        console.log(secondaryDetectorCenterY);
         var det_x0 = secondaryDetectorCenterX;
-        var det_y0 = secondaryDetectorCenterY;
+        var det_y0 = secondaryDetectorCenterY + 50;
         var sigma_x = 1050;
         var sigma_y = 750;
 
