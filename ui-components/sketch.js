@@ -84,7 +84,7 @@ function setup() {
 
 function draw() {
   background(230);
-  frameRate(simulationSpeed/100 * 60);
+  frameRate(simulationSpeed/100 * 120);
 
   if (initialPress != 0 && allMadeContact == false) {
     drawWrapperBeam();
