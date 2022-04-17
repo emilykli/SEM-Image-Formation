@@ -16,7 +16,7 @@ class Electron {
 
     collisionMathSteppedBlock() {
         if (topographyIndex == 0 || topographyIndex == 4) {
-            if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
+            if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in
             {
                 if (this.hasMadeContact) {
                     this.diameter = 0;
@@ -52,7 +52,7 @@ class Electron {
             }
         }
         else {
-            if (collideRectCircle(250, 642.5, 91.25, 10, this.x, this.y, this.diameter) || collideRectCircle(250 + 75, 570, 144, 10, this.x, this.y, this.diameter) || collideRectCircle(250 + 73 + 109.5, 642.5, 182.5, 10, this.x, this.y, this.diameter)) //collides with flat region  
+            if (collideRectCircle(250, 642.5, 91.25, 10, this.x, this.y, this.diameter) || collideRectCircle(250 + 75, 570, 144, 10, this.x, this.y, this.diameter) || collideRectCircle(250 + 73 + 109.5, 642.5, 182.5, 10, this.x, this.y, this.diameter)) //collides with flat region
             {
 
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
@@ -76,7 +76,7 @@ class Electron {
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
 
-                
+
             }
 
             else if (collideRectCircle(250 + 73, 550, 1, 150, this.x, this.y, this.diameter) || collideRectCircle(250 + 73 * 3, 550, 1, 150, this.x, this.y, this.diameter)) {
@@ -169,7 +169,7 @@ class Electron {
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
 
-                
+
             }
         }
 
@@ -192,7 +192,7 @@ class Electron {
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
 
-                
+
             }
         }
 
@@ -327,7 +327,7 @@ class Electron {
             }
         }
 
-        if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
+        if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in
         {
             if (this.hasMadeContact) {
                 this.diameter = 0;
@@ -387,7 +387,7 @@ class Electron {
                 this.x += this.xVel * 2;
                 this.y += this.yVel * 2;
                 this.hasMadeContact = true;
-                
+
             }
 
             //side bits
@@ -398,7 +398,7 @@ class Electron {
             }
         }
 
-        if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
+        if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in
         {
             if (this.hasMadeContact) {
                 this.diameter = 0;
@@ -921,7 +921,7 @@ class Electron {
                 break;
 
             case 4:
-                if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in 
+                if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in
                 {
                     if (this.hasMadeContact) {
                         this.diameter = 0;
@@ -957,7 +957,7 @@ class Electron {
     electronDriftMath() {
         var P_detector = 400;
         var KE = 8.01 * Math.pow(10, -18);
-        var delta_t = 0.001;
+        var delta_t = 0.005;
         var q_e = 1.602 * Math.pow(10, -19);
 
         var A = P_detector * q_e / KE * 5;
