@@ -69,7 +69,7 @@ function setup() {
 
   electrons = [];
 
-  for (let i = 0; i < 55; i++) {
+  for (let i = 0; i < 20; i++) {
     let beamCenter = 1 / 2 * (beamLeftBound + beamRightBound)
     let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
     let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;
@@ -166,7 +166,7 @@ function draw() {
 
         electrons = [];
 
-        for (let i = 0; i < 55; i++) {
+        for (let i = 0; i < 20; i++) {
           let beamCenter = 1 / 2 * (beamLeftBound + beamRightBound)
           let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
           let yCoord = -20 - 20 / 100 * maxElectronVelocity * i * 20;

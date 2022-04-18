@@ -66,7 +66,7 @@
                 <button class='circle-button' onclick="resetButton()"><img src="assets/restart.png"></button>
                 <script>
                   function resetButton() {
-                    if (playPauseIndex == 1) {
+                    if (playPauseIndex == 0) {
                       swapPlayPause();
                     }
                     playPause = true;
@@ -77,6 +77,7 @@
                     imageMatrix = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]];
                     sectionIndex = 0;
                     topographyIndex = 0;
+                    changeIsometricImage(5);
                     setup();
                   }
                 </script>
@@ -271,8 +272,9 @@
           <p></p>
           <ul class="inside-box">
             <li>
-              <button onclick="changeIsometricImage(-1)"><</button>
-                  <button onclick="changeIsometricImage(1)">></button>
+              <!-- <button onclick="changeIsometricImage(-1)"><</button>
+                  <button onclick="changeIsometricImage(1)">></button> -->
+                  <button onclick="changeIsometricImage(1)">skip</button>
 
                   <script>
 
@@ -283,36 +285,61 @@
                     var spireImages = ["assets/spire1.png", "assets/spire2.png", "assets/spire3.png", "assets/spire4.png", "assets/spire5.png"];
 
                     function changeIsometricImage(indexChange) {
+                      if(playPauseIndex == 1) {
+                        swapPlayPause();
+                      }
+                      setup();
                       topographyIndex += indexChange;
-                      if (topographyIndex < 0) {
-                        topographyIndex = 4;
-                      }
-                      if (topographyIndex > 4) {
-                        topographyIndex = 0;
-                      }
+                      // if (topographyIndex < 0) {
+                      //   topographyIndex = 4;
+                      // }
+                      // if (topographyIndex > 4) {
+                      //   topographyIndex = 0;
+                      // }
 
                       switch (globalShape) {
                         case 'two_blocks': {
-                          document.getElementById("isoImage").src = rectImages[topographyIndex];
+                          document.getElementById("isoImage").src = rectImages[topographyIndex % 5];
+                          for(let section = 0; section < 5; section++)
+                          {
+                            imageMatrix[section][topographyIndex - 1] = rectangle_results[section][topographyIndex - 1]
+                          }
                           break;
                         }
                         case 'dome': {
-                          document.getElementById("isoImage").src = domeImages[topographyIndex];
+                          document.getElementById("isoImage").src = domeImages[topographyIndex % 5];
+                          for(let section = 0; section < 5; section++)
+                          {
+                            imageMatrix[section][topographyIndex - 1] = dome_results[section][topographyIndex - 1]
+                          }
                           break;
                         }
                         case 'inverted_pyramid': {
-                          document.getElementById("isoImage").src = invertedPyramidImages[topographyIndex];
+                          document.getElementById("isoImage").src = invertedPyramidImages[topographyIndex % 5];
+                          for(let section = 0; section < 5; section++)
+                          {
+                            imageMatrix[section][topographyIndex - 1] = inverted_pyramid_results[section][topographyIndex - 1]
+                          }
                           break;
                         }
                         case 'pyramid': {
-                          document.getElementById("isoImage").src = pyramidImages[topographyIndex];
+                          document.getElementById("isoImage").src = pyramidImages[topographyIndex % 5];
+                          for(let section = 0; section < 5; section++)
+                          {
+                            imageMatrix[section][topographyIndex - 1] = pyramid_results[section][topographyIndex - 1]
+                          }
                           break;
                         }
                         case 'spire': {
-                          document.getElementById("isoImage").src = spireImages[topographyIndex];
+                          document.getElementById("isoImage").src = spireImages[topographyIndex % 5];
+                          for(let section = 0; section < 5; section++)
+                          {
+                            imageMatrix[section][topographyIndex - 1] = spire_results[section][topographyIndex - 1]
+                          }
                           break;
                         }
                       }
+                      topographyIndex = topographyIndex % 5;
                     }
                   </script>
             </li>
