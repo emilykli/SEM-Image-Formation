@@ -285,6 +285,11 @@
                     var spireImages = ["assets/spire1.png", "assets/spire2.png", "assets/spire3.png", "assets/spire4.png", "assets/spire5.png"];
 
                     function changeIsometricImage(indexChange) {
+                      let do_skip = true;
+                      if (indexChange != 1){
+                        do_skip = false;
+                      }
+
                       if(playPauseIndex == 1) {
                         swapPlayPause();
                       }
@@ -300,41 +305,51 @@
                       switch (globalShape) {
                         case 'two_blocks': {
                           document.getElementById("isoImage").src = rectImages[topographyIndex % 5];
-                          for(let section = 0; section < 5; section++)
-                          {
-                            imageMatrix[section][topographyIndex - 1] = rectangle_results[section][topographyIndex - 1]
+                          if(do_skip){
+                            for(let section = 0; section < 5; section++)
+                            {
+                              imageMatrix[section][topographyIndex - 1] = rectangle_results[section][topographyIndex - 1]
+                            }
                           }
                           break;
                         }
                         case 'dome': {
                           document.getElementById("isoImage").src = domeImages[topographyIndex % 5];
-                          for(let section = 0; section < 5; section++)
-                          {
-                            imageMatrix[section][topographyIndex - 1] = dome_results[section][topographyIndex - 1]
+                          if(do_skip){
+                            for(let section = 0; section < 5; section++)
+                            {
+                              imageMatrix[section][topographyIndex - 1] = dome_results[section][topographyIndex - 1]
+                            }
                           }
                           break;
                         }
                         case 'inverted_pyramid': {
                           document.getElementById("isoImage").src = invertedPyramidImages[topographyIndex % 5];
-                          for(let section = 0; section < 5; section++)
-                          {
-                            imageMatrix[section][topographyIndex - 1] = inverted_pyramid_results[section][topographyIndex - 1]
+                          if(do_skip){
+                            for(let section = 0; section < 5; section++)
+                            {
+                              imageMatrix[section][topographyIndex - 1] = inverted_pyramid_results[section][topographyIndex - 1]
+                            }
                           }
                           break;
                         }
                         case 'pyramid': {
                           document.getElementById("isoImage").src = pyramidImages[topographyIndex % 5];
-                          for(let section = 0; section < 5; section++)
-                          {
-                            imageMatrix[section][topographyIndex - 1] = pyramid_results[section][topographyIndex - 1]
+                          if(do_skip){
+                            for(let section = 0; section < 5; section++)
+                            {
+                              imageMatrix[section][topographyIndex - 1] = pyramid_results[section][topographyIndex - 1]
+                            }
                           }
                           break;
                         }
                         case 'spire': {
                           document.getElementById("isoImage").src = spireImages[topographyIndex % 5];
-                          for(let section = 0; section < 5; section++)
-                          {
-                            imageMatrix[section][topographyIndex - 1] = spire_results[section][topographyIndex - 1]
+                          if(do_skip){
+                            for(let section = 0; section < 5; section++)
+                            {
+                              imageMatrix[section][topographyIndex - 1] = spire_results[section][topographyIndex - 1]
+                            }
                           }
                           break;
                         }
