@@ -84,27 +84,27 @@ function setup() {
 
   switch (globalShape){
     case 'two_blocks': {
-      const image = rectangle_results;
+      const image_matrix = rectangle_results;
       break;
     }
     case 'dome': {
-      const image = dome_results;
+      const image_matrix = dome_results;
       break;
     }
     case 'inverted_pyramid': {
-      const image = inverted_pyramid_results;
+      const image_matrix = inverted_pyramid_results;
       break;
     }
     case 'pyramid': {
-      const image = pyramid_results;
+      const image_matrix = pyramid_results;
       break;
     }
     case 'spire': {
-      const image = spire_results;
+      const image_matrix = spire_results;
       break;
     }
   }
-  electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, image)
+  electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, image_matrix)
   // console.log("is set up");
 }
 
@@ -204,27 +204,27 @@ function draw() {
         }
         switch (globalShape){
           case 'two_blocks': {
-            const image = rectangle_results;
+            const image_matrix = rectangle_results;
             break;
           }
           case 'dome': {
-            const image = dome_results;
+            const image_matrix = dome_results;
             break;
           }
           case 'inverted_pyramid': {
-            const image = inverted_pyramid_results;
+            const image_matrix = inverted_pyramid_results;
             break;
           }
           case 'pyramid': {
-            const image = pyramid_results;
+            const image_matrix = pyramid_results;
             break;
           }
           case 'spire': {
-            const image = spire_results;
+            const image_matrix = spire_results;
             break;
           }
         }
-        electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, image)
+        electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, image_matrix)
       }
       else {
         if (topographyIndex == 4) {
