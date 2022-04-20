@@ -71,7 +71,7 @@ const s = (sketch) => {
 
     for (let r = 0; r < 5; r++) {
       for (let c = 0; c < 5; c++) {
-        if (r == sectionIndex && c == topographyIndex && isPlaying) {
+        if (r == topographyIndex && c == sectionIndex && isPlaying) {
           imageMatrix[r][c] = electronCount;
           // console.log(r + ", " + c + " : " + electronCount)
         }
