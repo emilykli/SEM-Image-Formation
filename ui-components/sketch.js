@@ -40,6 +40,8 @@ var interactionVolX, interactionVolY;
 
 var electrons_pixel;
 
+var image_matrix;
+
 function setup() {
 
   interactionVol = false;
@@ -84,23 +86,23 @@ function setup() {
 
   switch (globalShape){
     case 'two_blocks': {
-      const image_matrix = rectangle_results;
+      image_matrix = rectangle_results;
       break;
     }
     case 'dome': {
-      const image_matrix = dome_results;
+      image_matrix = dome_results;
       break;
     }
     case 'inverted_pyramid': {
-      const image_matrix = inverted_pyramid_results;
+      image_matrix = inverted_pyramid_results;
       break;
     }
     case 'pyramid': {
-      const image_matrix = pyramid_results;
+      image_matrix = pyramid_results;
       break;
     }
     case 'spire': {
-      const image_matrix = spire_results;
+      image_matrix = spire_results;
       break;
     }
   }

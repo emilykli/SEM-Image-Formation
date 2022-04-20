@@ -76,7 +76,7 @@ const s = (sketch) => {
           // console.log(r + ", " + c + " : " + electronCount)
         }
         sketch.fill(8 * imageMatrix[r][c]);
-        sketch.rect(40 * r, 40 * c, 40, 40);
+        sketch.rect(40 * c, 40 * r, 40, 40);
       }
     }
     // sketch.background(electronCount);

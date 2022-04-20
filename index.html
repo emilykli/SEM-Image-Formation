@@ -308,7 +308,7 @@
                           if(do_skip){
                             for(let section = 0; section < 5; section++)
                             {
-                              imageMatrix[section][topographyIndex - 1] = rectangle_results[section][topographyIndex - 1]
+                              imageMatrix[topographyIndex - 1][section] = rectangle_results[topographyIndex - 1][section]
                             }
                           }
                           break;
@@ -318,7 +318,7 @@
                           if(do_skip){
                             for(let section = 0; section < 5; section++)
                             {
-                              imageMatrix[section][topographyIndex - 1] = dome_results[section][topographyIndex - 1]
+                              imageMatrix[topographyIndex - 1][section] = dome_results[topographyIndex - 1][section]
                             }
                           }
                           break;
@@ -328,7 +328,7 @@
                           if(do_skip){
                             for(let section = 0; section < 5; section++)
                             {
-                              imageMatrix[section][topographyIndex - 1] = inverted_pyramid_results[section][topographyIndex - 1]
+                              imageMatrix[topographyIndex - 1][section] = inverted_pyramid_results[topographyIndex - 1][section]
                             }
                           }
                           break;
@@ -338,7 +338,7 @@
                           if(do_skip){
                             for(let section = 0; section < 5; section++)
                             {
-                              imageMatrix[section][topographyIndex - 1] = pyramid_results[section][topographyIndex - 1]
+                              imageMatrix[topographyIndex - 1][section] = pyramid_results[topographyIndex - 1][section]
                             }
                           }
                           break;
@@ -348,7 +348,7 @@
                           if(do_skip){
                             for(let section = 0; section < 5; section++)
                             {
-                              imageMatrix[section][topographyIndex - 1] = spire_results[section][topographyIndex - 1]
+                              imageMatrix[topographyIndex - 1][section] = spire_results[topographyIndex - 1][section]
                             }
                           }
                           break;
