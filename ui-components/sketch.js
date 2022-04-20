@@ -104,7 +104,7 @@ function setup() {
       break;
     }
   }
-  electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, image_matrix)
+  electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, rectangle_results)
   // console.log("is set up");
 }
 
