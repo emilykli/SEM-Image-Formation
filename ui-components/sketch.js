@@ -38,6 +38,8 @@ var interactionVol = false;
 
 var interactionVolX, interactionVolY;
 
+var electrons_pixel;
+
 function setup() {
 
   interactionVol = false;
@@ -176,6 +178,29 @@ function draw() {
 
           electrons.push(newElectron);
         }
+        switch (globalShape){
+          case 'two_blocks': {
+            const image = rectangle_results;
+            break;
+          }
+          case 'dome': {
+            const image = dome_results;
+            break;
+          }
+          case 'inverted_pyramid': {
+            const image = inverted_pyramid_results;
+            break;
+          }
+          case 'pyramid': {
+            const image = pyramid_results;
+            break;
+          }
+          case 'spire': {
+            const image = spire_results;
+            break;
+          }
+        }
+        electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, image)
       }
       else {
         if (topographyIndex == 4) {
@@ -324,4 +349,37 @@ function drawInteractionVolume() {
   fill(30, 30, 30, 100);
   circle(interactionVolX, interactionVolY, 30);
   stroke(1);
+}
+
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+function electrons_vec_pixel(topographyIndex, sectionIndex, num_elec, image){
+    detect_num_electrons = image[topographyIndex][sectionIndex]
+
+    let electrons_pixel = []
+    for (let i = 0; i < num_elec; i++){
+        if (i < detect_num_electrons){
+            electrons_pixel.push(true)
+        }
+        else {
+            electrons_pixel.push(false)
+        }
+    }
+    return shuffle(electrons_pixel)
 }

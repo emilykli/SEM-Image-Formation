@@ -15,6 +15,9 @@ class Electron {
     }
 
     collisionMathSteppedBlock() {
+        const detect = [[[4,5,6,7,8],[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]],[[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[5],[6,7,8,9]],[[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[5],[6,7,8,9]],[[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[5],[6,7,8,9]],[[4,5,6,7,8],[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]]];
+        const nodetect = [[[0,1,2,3,9],[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,6,7,8,9],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,6,7,8,9],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,6,7,8,9],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]]];
+
         if (topographyIndex == 0 || topographyIndex == 4) {
             if (collideRectCircle(250, 570 + 145 / 2, 365, 10, this.x, this.y, this.diameter)) //collides with left region in
             {
@@ -24,7 +27,7 @@ class Electron {
                 }
 
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-                let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+                let randomAngle = electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, this.index);
 
                 if (randomAngle == 0 || randomAngle == PI) {
                     this.diameter = 0;
@@ -56,7 +59,7 @@ class Electron {
             {
 
                 let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-                let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+                let randomAngle = electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, this.index);
 
                 if (randomAngle == 0 || randomAngle == PI) {
                     this.diameter = 0;
@@ -1037,4 +1040,27 @@ function angle_randomizer(index) {
 
     }
 
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+function electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, index){
+    const initial_angles = [0.524, 0.756, 0.989, 1.222, 1.454, 1.687, 1.92, 2.153, 2.385, 2.618] //rad
+
+    let detect_initial_angle_indx = detect[topographyIndex][sectionIndex]
+    let nodetect_initial_angle_indx = nodetect[topographyIndex][sectionIndex]
+    let initial_angle_indx
+    //console.log(detect_initial_angle_indx)
+
+    if (electrons_pixel[index]){
+        initial_angle_indx = detect_initial_angle_indx[getRandomInt(detect_initial_angle_indx.length)]
+    }
+    else {
+        initial_angle_indx = nodetect_initial_angle_indx[getRandomInt(nodetect_initial_angle_indx.length)]
+    }
+    let initial_angle = initial_angles[initial_angle_indx]
+    //console.log(initial_angle)
+    return initial_angle
 }
