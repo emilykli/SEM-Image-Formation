@@ -81,6 +81,30 @@ function setup() {
 
     electrons.push(newElectron);
   }
+
+  switch (globalShape){
+    case 'two_blocks': {
+      const image = rectangle_results;
+      break;
+    }
+    case 'dome': {
+      const image = dome_results;
+      break;
+    }
+    case 'inverted_pyramid': {
+      const image = inverted_pyramid_results;
+      break;
+    }
+    case 'pyramid': {
+      const image = pyramid_results;
+      break;
+    }
+    case 'spire': {
+      const image = spire_results;
+      break;
+    }
+  }
+  electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, image)
   // console.log("is set up");
 }
 
