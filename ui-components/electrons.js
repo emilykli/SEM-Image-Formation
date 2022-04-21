@@ -94,8 +94,11 @@ class Electron {
     }
 
     collisionMathDome() {
+        const detect = [[[4,5,6,7,8],[4,5,6,7,8],[0,1,2,3,4],[5,6],[6,7,8,9]],[[4,5,6,7,8],[2,3,4,5,6,7],[0,1,2,3,4],[0,1,9],[6]],[[2,4,5,6,7,8],[3,4,5,6,7],[0,1,3,4],[0,1,9],[2,6]],[[3,4,5,6,7,8],[4,5,6,7],[0,1,2,4],[0,1,3,9],[3,6,7]],[[4,5,6,7,8],[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]]];
+        const nodetect = [[[0,1,2,3,9],[0,1,2,3,9],[5,6,7,8,9],[0,1,2,3,4,7,8,9],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,1,8,9],[5,6,7,8,9],[2,3,4,5,6,7,8],[0,1,2,3,4,5,7,8,9]],[[0,1,3,9],[0,1,2,8,9],[2,5,6,7,8,9],[2,3,4,5,6,7,8],[0,1,3,4,5,7,8,9]],[[0,1,2,9],[0,1,2,3,8,9],[3,5,6,7,8,9],[2,4,5,6,7,8],[0,1,2,4,5,8,9]],[[0,1,2,3,9],[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]]];
+
         let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-        let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+        let randomAngle = electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, this.index);
         if (randomAngle == 0) {
             randomAngle += 0.1;
         }
@@ -229,8 +232,11 @@ class Electron {
     }
 
     collisionMathPyramid() {
+        const detect = [[[4,5,6,7,8],[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]],[[4,5,6,7,8],[2,3,4,5,6],[5,6,7,8,9],[3,4,5,6,7,8],[6,7,8,9]],[[4,5,6,7,8],[1,2,3,4,5,6],[5,6,7,8,9],[2,3,4,5,6],[6,7,8,9]],[[4,5,6,7,8],[4,5,6,7,8,9],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]],[[4,5,6,7,8],[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]]];
+        const nodetect = [[[0,1,2,3,9],[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,1,7,8,9],[0,1,2,3,4],[0,1,2,9],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,7,8,9],[0,1,2,3,4],[0,1,7,8,9],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,1,2,3],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]]];
+
         let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-        let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+        let randomAngle = electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, this.index);
 
         let bottomLeftX = 73 + 250;
         let bottomRightX = 292 + 250;
@@ -342,7 +348,7 @@ class Electron {
                 this.outOfFrame = true;
             }
             let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-            let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+            let randomAngle = electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, this.index);
 
             this.xVel = totalVelocity * cos(randomAngle);
             this.yVel = -totalVelocity * sin(randomAngle);
@@ -363,8 +369,11 @@ class Electron {
     }
 
     collisionMathInvertedPyramid() {
+        const detect = [[[4,5,6,7,8],[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]],[[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9],[]],[[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9],[]],[[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9],[]],[[4,5,6,7,8],[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]]];
+        const nodetect = [[[0,1,2,3,9],[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]],[[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5],[0,1,2,3,4,5,6,7,8,9]],[[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5],[0,1,2,3,4,5,6,7,8,9]],[[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5],[0,1,2,3,4,5,6,7,8,9]],[[0,1,2,3,9],[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]]];
+
         let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-        let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+        let randomAngle = electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, this.index);
         if (randomAngle == 0) {
             randomAngle += 0.1;
         }
@@ -409,7 +418,7 @@ class Electron {
             }
 
             let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-            let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+            let randomAngle = electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, this.index);
 
             if (randomAngle == 0 || randomAngle == PI) {
                 this.hasMadeContact = true;
@@ -435,8 +444,11 @@ class Electron {
     }
 
     collisionMathSpire() {
+        const detect = [[[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]],[[1,2,3,4,5],[2,3,4,5,6],[0,1,2,3,4],[0,1,2],[0,1,2,3]],[[1,2,3,4,5],[2,3,4,5,6],[0,1,2,3,4],[0,1,2],[0,1,2,3]],[[1,2,3,4,5],[1,2,3,4,5],[0,1,2,3,4],[0,1,2,3],[0,1,2,3]],[[4,5,6,7,8],[4,5,6,7,8],[5,6,7,8,9],[5,6,7,8,9],[6,7,8,9]]];
+        const nodetect = [[[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]],[[0,6,7,8,9],[0,1,7,8,9],[5,6,7,8,9],[3,4,5,6,7,8,9],[4,5,6,7,8,9]],[[0,6,7,8,9],[0,1,7,8,9],[5,6,7,8,9],[3,4,5,6,7,8,9],[4,5,6,7,8,9]],[[0,6,7,8,9],[0,6,7,8,9],[5,6,7,8,9],[4,5,6,7,8,9],[4,5,6,7,8,9]],[[0,1,2,3,9],[0,1,2,3,9],[0,1,2,3,4],[0,1,2,3,4],[0,1,2,3,4,5]]];
+
         let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-        let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+        let randomAngle = electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, this.index);
         let slope, angle;
 
         switch (topographyIndex) {
@@ -932,7 +944,7 @@ class Electron {
                     }
 
                     let totalVelocity = sqrt(this.xVel * this.xVel + this.yVel * this.yVel);
-                    let randomAngle = angle_randomizer(this.index % 11) / 10 * PI;
+                    let randomAngle = electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, detect, nodetect, this.index);
 
                     this.xVel = totalVelocity * cos(randomAngle);
                     this.yVel = -totalVelocity * sin(randomAngle);

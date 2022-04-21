@@ -106,7 +106,7 @@ function setup() {
       break;
     }
   }
-  electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, rectangle_results)
+  electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, image_matrix)
   // console.log("is set up");
 }
 
@@ -206,23 +206,23 @@ function draw() {
         }
         switch (globalShape){
           case 'two_blocks': {
-            const image_matrix = rectangle_results;
+            image_matrix = rectangle_results;
             break;
           }
           case 'dome': {
-            const image_matrix = dome_results;
+            image_matrix = dome_results;
             break;
           }
           case 'inverted_pyramid': {
-            const image_matrix = inverted_pyramid_results;
+            image_matrix = inverted_pyramid_results;
             break;
           }
           case 'pyramid': {
-            const image_matrix = pyramid_results;
+            image_matrix = pyramid_results;
             break;
           }
           case 'spire': {
-            const image_matrix = spire_results;
+            image_matrix = spire_results;
             break;
           }
         }
