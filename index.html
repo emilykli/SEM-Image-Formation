@@ -63,6 +63,7 @@
                     }
                   }
                 </script>
+                <button class='circle-button' onclick="changeIsometricImage(10)"><img src="assets/skip.png"></button>
                 <button class='circle-button' onclick="resetButton()"><img src="assets/restart.png"></button>
                 <script>
                   function resetButton() {
@@ -272,9 +273,9 @@
           <p></p>
           <ul class="inside-box">
             <li>
-              <!-- <button onclick="changeIsometricImage(-1)"><</button>
-                  <button onclick="changeIsometricImage(1)">></button> -->
-                  <button onclick="changeIsometricImage(1)">skip</button>
+                  <button onclick="changeIsometricImage(-1)"><</button>
+                  <button onclick="changeIsometricImage(1)">></button>
+                  <!-- <button onclick="changeIsometricImage(10)">skip</button> -->
 
                   <script>
 
@@ -285,9 +286,10 @@
                     var spireImages = ["assets/spire1.png", "assets/spire2.png", "assets/spire3.png", "assets/spire4.png", "assets/spire5.png"];
 
                     function changeIsometricImage(indexChange) {
-                      let do_skip = true;
-                      if (indexChange != 1){
-                        do_skip = false;
+                      let do_skip = false;
+                      if (indexChange == 10){
+                        do_skip = true;
+                        indexChange = 1;
                       }
 
                       if(playPauseIndex == 1) {

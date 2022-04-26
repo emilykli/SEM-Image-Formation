@@ -84,7 +84,8 @@ h3.box-title {
   width: 60px;
   height: 60px;
   border: none;
-  margin: -2px 15px 20px 0px;
+  margin: 0px;
+  /* margin: -2px 15px 20px 0px; */
   border-radius: 50%;
 
 }
