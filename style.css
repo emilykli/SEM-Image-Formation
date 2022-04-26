@@ -81,10 +81,11 @@ h3.box-title {
 }
 
 .circle-button {
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   border: none;
-  margin: 0px;
+  margin: 5px;
+  /* outline: 1px dotted cyan; */
   /* margin: -2px 15px 20px 0px; */
   border-radius: 50%;
 
@@ -113,6 +114,7 @@ h3.box-title {
 
 .slider {
   width: 70%;
+  margin: 20px 0px 0px 0px;
 }
 
 #leftbar {
