@@ -1,25 +1,3 @@
-
-class Coordinate {
-    constructor(a, b, c) {
-        this.x = a;
-        this.y = b;
-        this.z = c;
-
-        this.p5x = 250 + this.x;
-        this.p5y = 550 - this.y;
-    }
-}
-
-var rectHeights234 = [623.5, 623.5, 550, 550, 550, 550, 623.5, 623.5, 623.5, 623.5];
-var rectHeights15 = [623.5, 623.5, 623.5, 623.5, 623.5, 623.5, 623.5, 623.5, 623.5, 623.5];
-
-var dome2 = [new Coordinate(36.5, 0, 36.5), new Coordinate(109.5, 0, 36.5), new Coordinate(182.5, 145, 36.5), new Coordinate(255.5, 0, 36.5), new Coordinate(328.5, 0, 36.5)];
-var dome4 = [new Coordinate(36.5, 0, 109.5), new Coordinate(109.5, 187, 109.5), new Coordinate(182.5, 210, 109.5), new Coordinate(255.5, 187, 109.5), new Coordinate(328.5, 0, 109.5)];
-var dome6 = [new Coordinate(36.5, 0, 182.5), new Coordinate(109.5, 198.5, 182.5), new Coordinate(182.5, 220, 182.5), new Coordinate(255.5, 198.5, 182.5), new Coordinate(328.5, 0, 182.5)];
-var dome8 = [new Coordinate(36.5, 0, 255.5), new Coordinate(109.5, 162, 255.5), new Coordinate(182.5, 188.5, 255.5), new Coordinate(255.5, 162, 255.5), new Coordinate(328.5, 0, 255.5)];
-var dome10 = [new Coordinate(36.5, 0, 328.5), new Coordinate(109.5, 0, 328.5), new Coordinate(182.5, 0, 328.5), new Coordinate(255.5, 0, 328.5), new Coordinate(328.5, 0, 328.5)];
-
-
 class Sample {
     constructor(sampleName) {
         this.shape = sampleName;

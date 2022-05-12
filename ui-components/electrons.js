@@ -1064,7 +1064,6 @@ function electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, 
     let detect_initial_angle_indx = detect[topographyIndex][sectionIndex]
     let nodetect_initial_angle_indx = nodetect[topographyIndex][sectionIndex]
     let initial_angle_indx
-    //console.log(detect_initial_angle_indx)
 
     if (electrons_pixel[index]){
         initial_angle_indx = detect_initial_angle_indx[getRandomInt(detect_initial_angle_indx.length)]
@@ -1073,6 +1072,5 @@ function electron_initial_angle(topographyIndex, sectionIndex, electrons_pixel, 
         initial_angle_indx = nodetect_initial_angle_indx[getRandomInt(nodetect_initial_angle_indx.length)]
     }
     let initial_angle = initial_angles[initial_angle_indx]
-    //console.log(initial_angle)
     return initial_angle
 }

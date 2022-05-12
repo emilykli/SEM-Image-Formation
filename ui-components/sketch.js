@@ -1,12 +1,14 @@
 var canvasWidth = 792;
 var canvasHeight = 720;
 
+//the wrapper beam doesn't get drawn until the play button is initially pressed
 var isPlaying, initialPress;
 
 var canvasCenter = canvasWidth / 2;
-var objectiveLensHalfWidth = 100;
+var objectiveLensHalfWidth = 100; //used to calculate the left and right bounds of the objective lens
 var objectiveLensHeight = 50;
 
+//center of secondary detector
 var secondaryDetectorCenterX;
 var secondaryDetectorCenterY;
 
@@ -42,6 +44,11 @@ var electrons_pixel;
 
 var image_matrix;
 
+/*
+setup() is called once at the beginning, as well as whenever setup() is called
+later in the function (i usually just used this function to 'reset' the canvas whenever
+the user pressed the reset button)
+*/
 function setup() {
 
   interactionVol = false;
@@ -57,12 +64,10 @@ function setup() {
   initialPress = 0;
 
   var canvas = createCanvas(canvasWidth, canvasHeight);
-  // console.log(windowWidth * 0.55 + " " + windowHeight * 0.80);
 
   // Move the canvas so it’s inside our <div id="sketch-holder">.
   canvas.parent('sketch-holder');
 
-  // background(round(random(0, 255)),round(random(0, 255)),round(random(0, 255)));
   background(230);
 
   sample = new Sample(globalShape);
@@ -73,6 +78,7 @@ function setup() {
 
   electrons = [];
 
+  //adding electrons to our electron array
   for (let i = 0; i < 20; i++) {
     let beamCenter = 1 / 2 * (beamLeftBound + beamRightBound)
     let xCoord = canvasCenter + i * 20 * 20 / 100 * maxElectronVelocity * (canvasCenter - beamCenter) / (623.5);
@@ -107,23 +113,33 @@ function setup() {
     }
   }
   electrons_pixel = electrons_vec_pixel(topographyIndex, sectionIndex, 20, image_matrix)
-  // console.log("is set up");
 }
 
+/*
+draw() redraws our canvas at the given framerate (specified by whatever value gets passee
+into frameRate)
+
+in this program the frame rate caps at 60
+*/
 function draw() {
   background(230);
   frameRate(simulationSpeed/100 * 60);
 
+  //the wrapper beam only gets drawn when the play button has already been pressed and
+  //when there are electrons still being shot out at the surface
   if (initialPress != 0 && allMadeContact == false) {
     drawWrapperBeam();
   }
 
   if (isPlaying) {
 
+    //electron collisions
+
     for (let i = electrons.length - 1; i >= 0; i -= 1) {
       electrons[i].x += electrons[i].xVel;
       electrons[i].y += electrons[i].yVel;
 
+      //checking if electron has collided with surface
       switch (globalShape) {
         case 'two_blocks': {
           electrons[i].collisionMathSteppedBlock();
@@ -146,9 +162,12 @@ function draw() {
           break;
         }
       }
-
+      
+      //checking if electron has collided with secondary detector
       electrons[i].secondaryDetectorCollision();
 
+      //if electron has collided with surface it will move with a certain trajectory
+      //towards the secondary detector
       if (electrons[i].hasMadeContact) {
         electrons[i].electronDriftMath();
       }
@@ -157,6 +176,10 @@ function draw() {
       electrons[i].distanceFromDetectorY = abs(electrons[i].y - secondaryDetectorCenterY);
       electrons[i].distance = sqrt(electrons[i].distanceFromDetectorX * electrons[i].distanceFromDetectorX + electrons[i].distanceFromDetectorY * electrons[i].distanceFromDetectorY);
     }
+
+    //checking if all of the electrons have made contact
+    //for some reason if i don't assign allMadeContact at the end there are some bugs?
+    //same with allOutOfFrame
 
     let allMadeContactTemp = true;
     for (let i = 0; i < electrons.length; i++) {
@@ -167,20 +190,20 @@ function draw() {
     if (allMadeContactTemp) {
       allMadeContact = true;
     }
+
     let allOutOfFrameTemp = true;
     for (let i = 0; i < electrons.length; i++) {
-      //console.log(i + " " + electrons[i].outOfFrame);
       if (electrons[i].outOfFrame == false) {
         allOutOfFrameTemp = false;
-        //console.log(i);
       }
     }
     if (allOutOfFrameTemp == true) {
-      //background(100, 100, 100);
       allOutOfFrame = true;
 
     }
 
+    //resetting to go to the next 'section' of the surface once all of the electrons have left the
+    //frame
     if (allOutOfFrame) {
       if (sectionIndex <= 3) {
         sectionIndex += 1;
@@ -270,6 +293,7 @@ function draw() {
   }
 
 
+//drawing all of the electrons
   fill(255);
   stroke(1);
   for (let i = 0; i < electrons.length; i++) {
@@ -282,18 +306,6 @@ function draw() {
   drawSecondaryDetector();
 
   sample.drawSample();
-
-  // fill(0);
-  // rect(250, 642.5, 91.25, 10);
-  // rect(250 + 73, 550, 1, 150);
-  // rect(250 + 73, 570, 146, 10);
-  // fill(color('#A020F0'))
-  // rect(250 + 73*3, 550, 1, 150);
-  // fill(0)
-  // rect(250 + 73 + 109.5, 642.5, 182.5, 10);
-
-  // fill(0);
-  // ellipse(432.5, 623.5, 250);
 
   if (interactionVol && !allMadeContact) {
     drawInteractionVolume();

@@ -15,7 +15,6 @@ h1 {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 51px;
   margin: 25px 50px 0;
-  /* outline: 1px dotted green; */
 }
 
 ul {
@@ -28,26 +27,22 @@ ul.horizontal {
   text-align: center;
   display: flex;
   align-items: flex-start;
-  /* outline: 1px dotted pink; */
 }
 ul.horizontal > li {
   display: flex;
   margin: 10px;
   padding: 0;
   height: 720px;
-  /* outline: 1px dotted yellow; */
 }
 
 ul.verticalLeft{
   padding: 0;
   margin: 0;
-  /* outline: 1px dotted cyan; */
 }
 
 ul.verticalLeft > li {
   display: flex;
   background-color: whitesmoke;
-  /* outline: 1px dotted crimson; */
   width: 220px;
   height: 220px;
   margin: 12px 0;
@@ -56,14 +51,12 @@ ul.verticalLeft > li {
 ul.verticalRight{
   padding: 0;
   margin: 0;
-  /* outline: 1px dotted cyan; */
 }
 
 ul.verticalRight > li {
   display: flex;
   width: 300px;
   background-color: whitesmoke;
-  /* outline: 1px dotted crimson; */
   height: 300px;
   margin: 40px 0;
 }
@@ -85,8 +78,6 @@ h3.box-title {
   height: 55px;
   border: none;
   margin: 5px;
-  /* outline: 1px dotted cyan; */
-  /* margin: -2px 15px 20px 0px; */
   border-radius: 50%;
 
 }

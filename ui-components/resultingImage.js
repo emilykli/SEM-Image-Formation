@@ -62,7 +62,6 @@ const s = (sketch) => {
       }
     }
 
-    // console.log("hello")
   };
 
   sketch.draw = () => {
@@ -73,13 +72,11 @@ const s = (sketch) => {
       for (let c = 0; c < 5; c++) {
         if (r == topographyIndex && c == sectionIndex && isPlaying) {
           imageMatrix[r][c] = electronCount;
-          // console.log(r + ", " + c + " : " + electronCount)
         }
         sketch.fill(8 * imageMatrix[r][c]);
         sketch.rect(40 * c, 40 * r, 40, 40);
       }
     }
-    // sketch.background(electronCount);
   };
 };
 

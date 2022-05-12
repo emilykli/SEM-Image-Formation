@@ -38,7 +38,6 @@
 
   <ul class="horizontal">
     <li id="leftbar">
-      <!-- <ul class="verticalLeft" onclick = "setup()"> -->
       <ul class="verticalLeft">
         <li id="rounded-corners">
           <h3 class="box-title">Simulation Controls</p>
@@ -49,7 +48,6 @@
                   var img_array = ["assets/play.png", "assets/pause.png"]
                   var playPauseIndex = 0;
                   function swapPlayPause() {
-                    // console.log("pressed");
                     playPauseIndex = playPauseIndex + 1;
                     playPauseIndex = playPauseIndex % 2;
                     document.getElementById("play-pause-button").src = img_array[playPauseIndex];
@@ -71,7 +69,6 @@
                       swapPlayPause();
                     }
                     playPause = true;
-                    //featureSelectionButton(globalShape);
                     electronCount = 0;
                     currentRow = 0;
                     currentColumn = 0;
@@ -275,7 +272,6 @@
             <li>
                   <button onclick="changeIsometricImage(-1)"><</button>
                   <button onclick="changeIsometricImage(1)">></button>
-                  <!-- <button onclick="changeIsometricImage(10)">skip</button> -->
 
                   <script>
 
@@ -365,15 +361,6 @@
       </ul>
     </li>
   </ul>
-
-  <!-- <div class="lightbox">
-    <div class="iframeContainer">
-      <div class="toolbarLB">
-        <span class="closeLB" onclick="lightBoxClose()">x</span>
-      </div>
-      <p>For best results, use in full screen mode.</p>
-    </div>
-  </div> -->
 
 </body>
 
